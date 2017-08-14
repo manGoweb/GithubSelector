@@ -28,6 +28,11 @@ it, simply add the following line to your Cartfile:
 github "manGoweb/GithubSelector"
 ```
 
+## Dependencies
+
+* [Presentables](https://github.com/manGoweb/Presentables)
+* [Octokit](https://github.com/nerdishbynature/octokit.swift)
+
 
 ## Author
 
