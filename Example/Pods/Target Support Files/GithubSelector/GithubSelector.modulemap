@@ -1,0 +1,6 @@
+framework module GithubSelector {
+  umbrella header "GithubSelector-umbrella.h"
+
+  export *
+  module * { export * }
+}
