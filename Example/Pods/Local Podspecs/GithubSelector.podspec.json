@@ -1,8 +1,8 @@
 {
   "name": "GithubSelector",
   "version": "0.1.0",
-  "summary": "A short description of GithubSelector.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "Github API enabled file selector written in Swift.",
+  "description": "This shall be good!",
   "homepage": "https://github.com/Ondrej Rafaj/GithubSelector",
   "license": {
     "type": "MIT",
@@ -15,8 +15,20 @@
     "git": "https://github.com/Ondrej Rafaj/GithubSelector.git",
     "tag": "0.1.0"
   },
+  "social_media_url": "https://twitter.com/rafiki270",
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "GithubSelector/Classes/**/*"
+  "source_files": "GithubSelector/Classes/**/*",
+  "dependencies": {
+    "SnapKit": [
+      "~> 3.2.0"
+    ],
+    "Presentables": [
+      "~> 0.1.0"
+    ],
+    "OctoKit.swift": [
+      "~> 0.7.3"
+    ]
+  }
 }
