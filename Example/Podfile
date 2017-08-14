@@ -6,6 +6,7 @@ use_frameworks!
 
 target 'GithubSelector_Example' do
     pod 'GithubSelector', :path => '../'
+    pod 'SnapKit'
     pod 'Presentables'
     pod 'OctoKit.swift'
     

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GithubSelector
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = nc
         window!.makeKeyAndVisible()
         
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        GithubSelector.shared.handle(openURL: url)
         return true
     }
 
