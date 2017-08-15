@@ -21,19 +21,38 @@ public final class GithubSelector {
     public var localizable: Localizable = Localization()
     
     public var didReceiveAuthToken: ((_ token: String)->())?
+    public var logout: (()->())?
     
     var configuration: GithubSelectorConfigurable!
     
+    private var _oAuthConfig: OAuthConfiguration?
     var oAuthConfig: OAuthConfiguration! {
-            return OAuthConfiguration(token: configuration.clientId, secret: configuration.clientSecret, scopes: ["repo", "read:org"])
+        if _oAuthConfig == nil {
+            _oAuthConfig = OAuthConfiguration(token: configuration.clientId, secret: configuration.clientSecret, scopes: ["repo", "read:org"])
+        }
+        return _oAuthConfig
     }
     
+    private var _tokenConfig: TokenConfiguration?
+    var tokenConfig: TokenConfiguration! {
+        get {
+            if _tokenConfig == nil {
+                guard let token = configuration.clientToken else {
+                    return nil
+                }
+                _tokenConfig = TokenConfiguration(token)
+            }
+            return _tokenConfig
+        }
+        set {
+            _tokenConfig = newValue
+        }
+    }
     
     // MARK: - Presenting
     
     public func baseViewController() -> UINavigationController {
         let home = HomeViewController()
-        home.githubSelector = self
         let nc = UINavigationController(rootViewController: home)
         
         if configuration == nil {
@@ -56,14 +75,18 @@ public final class GithubSelector {
     // MARK: - Handling incoming auth urls
     
     public func handle(openURL url: URL) {
-        guard let token: String = url.absoluteString.components(separatedBy: "code=").last, token.characters.count > 0 else {
-            return
+        oAuthConfig.handleOpenURL(url: url) { config in
+            guard let token = config.accessToken else {
+                return
+            }
+            
+            self.tokenConfig = config
+            self.configuration.clientToken = token
+            
+            NotificationCenter.default.post(name: GithubSelectorLoginChangedNotification, object: config)
+            
+            self.didReceiveAuthToken?(token)
         }
-        configuration.clientToken = token
-        
-        NotificationCenter.default.post(name: GithubSelectorLoginChangedNotification, object: nil)
-        
-        didReceiveAuthToken?(token)
     }
     
     // MARK: - Private interface

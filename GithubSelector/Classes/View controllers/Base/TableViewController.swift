@@ -12,6 +12,4 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    var githubSelector: GithubSelector!
-    
 }

@@ -27,7 +27,7 @@ class LoginViewController: ViewController {
         authButton.layer.cornerRadius = 5
         authButton.layer.borderColor = UIColor.blue.cgColor
         authButton.layer.borderWidth = 1
-        authButton.setTitle(GithubSelector.shared.localizable.get("login.oauth-button"), for: .normal)
+        authButton.setTitle("login.oauth-button".localized(), for: .normal)
         authButton.setTitleColor(.blue, for: .normal)
         authButton.addTarget(self, action: #selector(authenticate(_:)), for: .touchUpInside)
         view.addSubview(authButton)

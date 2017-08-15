@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import GithubSelector
+import KeychainSwift
 
 
 class ViewController: UIViewController {
@@ -70,6 +71,20 @@ class ViewController: UIViewController {
         let config = GithubSelectorConfig()
         config.clientId = clientId
         config.clientSecret = clientSecret
+        
+        let keychainKey = "github-token"
+        
+        let keychain = KeychainSwift()
+        GithubSelector.shared.didReceiveAuthToken = { token in
+            keychain.set(token, forKey: keychainKey)
+        }
+        GithubSelector.shared.logout = {
+            keychain.delete(keychainKey)
+        }
+        if let token = keychain.get(keychainKey) {
+            config.clientToken = token
+        }
+        
         GithubSelector.present(inViewController: self, configuration: config)
     }
 

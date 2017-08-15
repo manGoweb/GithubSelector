@@ -12,6 +12,4 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var githubSelector: GithubSelector!
-    
 }

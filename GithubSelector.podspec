@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/Ondrej Rafaj/GithubSelector.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/rafiki270'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.1'
 
   s.source_files = 'GithubSelector/Classes/**/*'
   
@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'SnapKit', '~> 3.2.0'
-  s.dependency 'Presentables', '~> 0.1.0'
+  s.dependency 'Presentables', '~> 0.1.3'
   s.dependency 'OctoKit.swift', '~> 0.7.3'
 end

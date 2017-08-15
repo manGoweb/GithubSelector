@@ -16,3 +16,12 @@ class Localization: Localizable {
     }
     
 }
+
+
+extension String {
+    
+    func localized() -> String {
+        return GithubSelector.shared.localizable.get(self)
+    }
+    
+}
