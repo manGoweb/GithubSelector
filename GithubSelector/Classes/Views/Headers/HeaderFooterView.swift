@@ -1,5 +1,5 @@
 //
-//  TableViewCell.swift
+//  HeaderFooterView.swift
 //  Pods
 //
 //  Created by Ondrej Rafaj on 16/08/2017.
@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import UIKit
 
 
-class TableViewCell: UITableViewCell {
+class HeaderFooterView: UITableViewHeaderFooterView {
     
     
     // MARK: Elements
@@ -35,8 +34,8 @@ class TableViewCell: UITableViewCell {
         layoutElements()
     }
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         
         setup()
     }

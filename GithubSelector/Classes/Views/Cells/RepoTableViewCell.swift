@@ -41,10 +41,10 @@ class RepoTableViewCell: TableViewCell, Presentable {
             else {
                 when = "general.never".localized()
             }
-            repoLastPushLabel.text = "Last push: \(when)"
+            repoLastPushLabel.text = "* Last push: \(when)"
             
-            let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(repo.size), countStyle: .file)
-            repoSizeLabel.text = "Size: \(fileSizeWithUnit)"
+            let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(repo.size * 1000), countStyle: .file)
+            repoSizeLabel.text = "* Size: \(fileSizeWithUnit)"
             
             privateImageView.text = repo.isPrivate ? "P" : "O"
             privateImageView.backgroundColor = repo.isPrivate ? .red : .green

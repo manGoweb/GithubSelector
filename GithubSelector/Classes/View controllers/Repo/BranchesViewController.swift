@@ -1,8 +1,8 @@
 //
-//  FilesViewController.swift
+//  BranchesViewController.swift
 //  Pods
 //
-//  Created by Ondrej Rafaj on 16/08/2017.
+//  Created by Ondrej Rafaj on 17/08/2017.
 //
 //
 
@@ -12,9 +12,9 @@ import Octokit
 import Presentables
 
 
-class FilesViewController: TableViewController {
+class BranchesViewController: TableViewController {
     
-    let dataManager = ReposDataController()
+    let dataManager = BranchesDataController()
     
     var repo: Repository! {
         didSet {
@@ -35,7 +35,15 @@ class FilesViewController: TableViewController {
             return
         }
         
-        
+        Octokit(config).branches(owner: repo.owner.login!, repo: repo.name!) { (response) in
+            switch response {
+            case .success(let branches):
+                self.dataManager.convertData(branches: branches)
+            case .failure(let error):
+                print(error)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     // MARK: Elements

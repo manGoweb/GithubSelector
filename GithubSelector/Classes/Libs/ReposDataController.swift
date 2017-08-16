@@ -14,6 +14,7 @@ import Presentables
 class ReposDataController: PresentableTableViewDataManager {
     
     var indexLetters: [String] = []
+    var originalDataInSections: [[Repository]] = []
     
     // MARK: Data
     
@@ -21,10 +22,12 @@ class ReposDataController: PresentableTableViewDataManager {
         data = []
         
         indexLetters = []
+        originalDataInSections = []
         
         let sortedRepos = repos.sorted { $0.name!.lowercased() < $1.name!.lowercased() }
         
         var lastSection: PresentableSection!
+        var lastDataSection: [Repository]!
         
         for repo: Repository in sortedRepos {
             let firstLetter: String = ((repo.name != nil) ? "\(repo.name!.characters.first ?? "-")" : "-").uppercased()
@@ -33,8 +36,10 @@ class ReposDataController: PresentableTableViewDataManager {
                 
                 if lastSection != nil {
                     data.append(lastSection)
+                    originalDataInSections.append(lastDataSection)
                 }
                 lastSection = PresentableSection()
+                lastDataSection = []
             }
             
             let presenter = RepoTableViewCellPresenter()
@@ -46,7 +51,22 @@ class ReposDataController: PresentableTableViewDataManager {
             }
             
             lastSection.presenters.append(presenter)
+            lastDataSection.append(repo)
         }
+        
+        // LAst section will have a total footer
+        let footer = WrapUpFooterPresenter()
+        footer.configure = { presentable in
+            guard let footer = presentable as? WrapUpFooter else {
+                return
+            }
+            footer.label.text = "Total: \(repos.count)"
+        }
+        lastSection.footer = footer
+        
+        // Append the last remaining section
+        data.append(lastSection)
+        originalDataInSections.append(lastDataSection)
         
         self.needsReloadData?()
     }
@@ -79,6 +99,13 @@ class ReposDataController: PresentableTableViewDataManager {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard section == (data.count - 1) else {
+            return 0
+        }
         return 44
     }
     

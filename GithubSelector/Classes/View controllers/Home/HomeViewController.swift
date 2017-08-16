@@ -14,15 +14,27 @@ import Presentables
 
 class HomeViewController: TableViewController {
     
-    let dataController = ReposDataController()
+    let dataManager = ReposDataController()
+    var didLoadData: Bool = false
     
     
     // MARK: Data
     
     private func setupDataManager() {
-        var dc: PresentableManager = dataController
+        dataManager.didTapCell = { info in
+            self.tableView.deselectRow(at: info.indexPath, animated: true)
+            let repo: Repository = self.dataManager.originalDataInSections[info.indexPath.section][info.indexPath.row]
+            
+            let c = BranchesViewController()
+            c.repo = repo
+            self.navigationController?.pushViewController(c, animated: true)
+        }
+        
+        var dc: PresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)
     }
+    
+    let perPage: Int = 100
     
     private func loadData() {
         guard let config = GithubSelector.shared.tokenConfig else {
@@ -34,19 +46,20 @@ class HomeViewController: TableViewController {
         
         loadData(config) { repos in
             allRepos.append(contentsOf: repos)
-            if repos.count < 100 {
-                self.dataController.convertData(repos: allRepos)
+            if repos.count < self.perPage {
+                self.didLoadData = true
+                self.dataManager.convertData(repos: allRepos)
             }
         }
     }
     
     private func loadData(_ config: TokenConfiguration, page: Int = 1, completion: @escaping ((_ repos: [Repository])->())) {
-        Octokit(config).repositories(page: String(page), perPage: "100") { response in
+        Octokit(config).repositories(page: String(page), perPage: String(perPage)) { response in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let repos):
                     completion(repos)
-                    if repos.count == 100 {
+                    if repos.count == self.perPage {
                         self.loadData(config, page: (page + 1), completion: completion)
                     }
                 case .failure(let error):
@@ -67,9 +80,16 @@ class HomeViewController: TableViewController {
     }
     
     func configureTableView() {
+        tableView.sectionIndexBackgroundColor = UIColor(white: 1, alpha: 0.08)
+        tableView.estimatedSectionHeaderHeight = 44
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        
         tableView.estimatedRowHeight = 64
         tableView.rowHeight = UITableViewAutomaticDimension
-    }
+
+        tableView.estimatedSectionFooterHeight = 0
+        tableView.sectionFooterHeight = UITableViewAutomaticDimension
+}
     
     // MARK: Actions
     
@@ -108,7 +128,9 @@ class HomeViewController: TableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadData()
+        if !didLoadData {
+            loadData()
+        }
     }
     
 }

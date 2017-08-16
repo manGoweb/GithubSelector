@@ -41,6 +41,8 @@
 		607FACE51AFB9204008FA782 /* GithubSelector_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GithubSelector_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		71071D6E918B8E057528259E /* Pods-GithubSelector_Example.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSelector_Example.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-GithubSelector_Example/Pods-GithubSelector_Example.enterprise.xcconfig"; sourceTree = "<group>"; };
+		71D3CB9622F47044BADEF9AC /* Pods-GithubSelector_Tests.enterprise.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSelector_Tests.enterprise.xcconfig"; path = "Pods/Target Support Files/Pods-GithubSelector_Tests/Pods-GithubSelector_Tests.enterprise.xcconfig"; sourceTree = "<group>"; };
 		73EDD7BBEDBCF1B0BB3F1BCB /* GithubSelector.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GithubSelector.podspec; path = ../GithubSelector.podspec; sourceTree = "<group>"; };
 		8FC66BDF27599D4D423BBD8E /* Pods-GithubSelector_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSelector_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GithubSelector_Tests/Pods-GithubSelector_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4ABD1C32DD45DD793F46C64 /* Pods-GithubSelector_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSelector_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-GithubSelector_Example/Pods-GithubSelector_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +165,8 @@
 				A4ABD1C32DD45DD793F46C64 /* Pods-GithubSelector_Example.release.xcconfig */,
 				8FC66BDF27599D4D423BBD8E /* Pods-GithubSelector_Tests.debug.xcconfig */,
 				0D4B46D1ACBC776340395158 /* Pods-GithubSelector_Tests.release.xcconfig */,
+				71071D6E918B8E057528259E /* Pods-GithubSelector_Example.enterprise.xcconfig */,
+				71D3CB9622F47044BADEF9AC /* Pods-GithubSelector_Tests.enterprise.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -542,7 +546,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Enterprise */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4ABD1C32DD45DD793F46C64 /* Pods-GithubSelector_Example.release.xcconfig */;
+			baseConfigurationReference = 71071D6E918B8E057528259E /* Pods-GithubSelector_Example.enterprise.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -582,7 +586,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Enterprise */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0D4B46D1ACBC776340395158 /* Pods-GithubSelector_Tests.release.xcconfig */;
+			baseConfigurationReference = 71D3CB9622F47044BADEF9AC /* Pods-GithubSelector_Tests.enterprise.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
