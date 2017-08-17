@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		02164AE23E1A7B746EE82A5B2AFADE28 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB55E6F805B0FBE858CFB8E4F5E56D76 /* Repositories.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		02739E0AB1686DEF6E4E60A406C85153 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542E925037248E0513940EF0CC4E8ACF /* Expectation.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		02CC19C08253FC8EDCE96791003B8F18 /* Branches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775059E87D2FAED7FEF68A980558B6 /* Branches.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		02CC19C08253FC8EDCE96791003B8F18 /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92775059E87D2FAED7FEF68A980558B6 /* Branch.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		038DF6143E1E7E30D1F8AD1057D50B49 /* CwlBadInstructionException.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70D14DEF75FDB7BFB6DADC4AF90724A /* CwlBadInstructionException.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		03EE00D6F9FFBF366B25F45E12678940 /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB8AF5D0C2CBF99946D2B58F3ED476E /* Stars.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		059E1DEC26CF55602942D72D5C7570C8 /* ExampleHooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9A44AA1BBEE5338FF590E27692F37C /* ExampleHooks.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -34,6 +34,9 @@
 		155609A6F2B6F53BA33677388B8A2B3B /* QuickSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A84EE3B7DD1ABAD7FA7C6D44ED4C32CE /* QuickSpec.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1582619C1F45098900E40A28 /* BranchesDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1582619B1F45098900E40A28 /* BranchesDataController.swift */; };
 		1582619E1F4509F100E40A28 /* BranchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1582619D1F4509F100E40A28 /* BranchTableViewCell.swift */; };
+		158261A01F46116E00E40A28 /* CommitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1582619F1F46116E00E40A28 /* CommitsViewController.swift */; };
+		158261A21F4611BC00E40A28 /* CommitsDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158261A11F4611BC00E40A28 /* CommitsDataController.swift */; };
+		158261A41F46180B00E40A28 /* CommitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158261A31F46180B00E40A28 /* CommitTableViewCell.swift */; };
 		173B4B1C5318571F625EA4C767217500 /* HeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B7D63AFE7BCE1E3844117169E781D /* HeaderFooterView.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		18E88F65ED1AFDCD68617D4E7027E6E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8FCAC80A4E060CAD84D48DCCE84C29 /* LoginViewController.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		1928BDCEE3F5C2B2A0BD702F78EFC098 /* HaveValidSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71744BB9E8C55CDF9785911706529EAA /* HaveValidSnapshot.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -411,6 +414,9 @@
 		146AA9B402559A606B9781B5025354D4 /* Nimble_Snapshots.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Nimble_Snapshots.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1582619B1F45098900E40A28 /* BranchesDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchesDataController.swift; sourceTree = "<group>"; };
 		1582619D1F4509F100E40A28 /* BranchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BranchTableViewCell.swift; sourceTree = "<group>"; };
+		1582619F1F46116E00E40A28 /* CommitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitsViewController.swift; sourceTree = "<group>"; };
+		158261A11F4611BC00E40A28 /* CommitsDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitsDataController.swift; sourceTree = "<group>"; };
+		158261A31F46180B00E40A28 /* CommitTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitTableViewCell.swift; sourceTree = "<group>"; };
 		16020FF5AE8FC86A6F5A24EE5ED5230B /* UITableView+Cells.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UITableView+Cells.swift"; path = "Presentables/Classes/Helpers/UITableView+Cells.swift"; sourceTree = "<group>"; };
 		1886471782BE26211C731AFDEA45DC71 /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
 		192600A0C143DC4C1F9721A5EA44A906 /* Pods-GithubSelector_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-GithubSelector_Example-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -545,7 +551,7 @@
 		8F1D7244E15F2A1B37AFD405DFEC5C43 /* KeychainSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A30664F37DE14B7C264CE3993E0135 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
 		90C99D52B98E720EDC2BC6A669E46D14 /* RepoTableViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RepoTableViewCell.swift; sourceTree = "<group>"; };
-		92775059E87D2FAED7FEF68A980558B6 /* Branches.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Branches.swift; path = OctoKit/Branches.swift; sourceTree = "<group>"; };
+		92775059E87D2FAED7FEF68A980558B6 /* Branch.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Branch.swift; path = OctoKit/Branch.swift; sourceTree = "<group>"; };
 		9376D169A9764F43212D03321D19EA66 /* CwlCatchBadInstruction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CwlCatchBadInstruction.h; path = Sources/Lib/CwlPreconditionTesting/CwlPreconditionTesting/CwlCatchBadInstruction.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9487E3356ED32694528825894FB18D5A /* OctoKit.swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OctoKit.swift-umbrella.h"; sourceTree = "<group>"; };
@@ -917,6 +923,7 @@
 			children = (
 				4587B8430BB2956D89486AB1664F3664 /* BranchesViewController.swift */,
 				E63AE03E8FF10B74D0A8A4B6404F9364 /* FilesViewController.swift */,
+				1582619F1F46116E00E40A28 /* CommitsViewController.swift */,
 			);
 			path = Repo;
 			sourceTree = "<group>";
@@ -928,6 +935,7 @@
 				90C99D52B98E720EDC2BC6A669E46D14 /* RepoTableViewCell.swift */,
 				282DC9FB4FD64740F0D9D1CDB6E21634 /* TableViewCell.swift */,
 				1582619D1F4509F100E40A28 /* BranchTableViewCell.swift */,
+				158261A31F46180B00E40A28 /* CommitTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1009,7 +1017,7 @@
 		1D555CADD4E789EE434009DBB234AB56 /* OctoKit.swift */ = {
 			isa = PBXGroup;
 			children = (
-				92775059E87D2FAED7FEF68A980558B6 /* Branches.swift */,
+				92775059E87D2FAED7FEF68A980558B6 /* Branch.swift */,
 				2C586B703E7C35BB41D71869EFB273D9 /* Commit.swift */,
 				076249CB21576FC0DA24E83525FE0065 /* Configuration.swift */,
 				B18AC70B312E967A07B2F7E57B8595C2 /* Follow.swift */,
@@ -1280,6 +1288,7 @@
 		8686737DFDE5FB7ADCA361FC51985EED /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				158261A11F4611BC00E40A28 /* CommitsDataController.swift */,
 				1582619B1F45098900E40A28 /* BranchesDataController.swift */,
 				4A4400D9762CAAFD6D4E922C62E8AC49 /* ReposDataController.swift */,
 				B3B7AEE74A74300BC88309F6A50F04DE /* Localization */,
@@ -2016,7 +2025,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F598AD2561C3720E6B80EA876A1DE93 /* BranchesViewController.swift in Sources */,
+				158261A01F46116E00E40A28 /* CommitsViewController.swift in Sources */,
 				B645A4BB4EB0E4AB56A5E97BF093FA4F /* FilesViewController.swift in Sources */,
+				158261A21F4611BC00E40A28 /* CommitsDataController.swift in Sources */,
 				DE3F989B0208BC8CB45157D332E28826 /* GithubSelector-dummy.m in Sources */,
 				93A0D201AFFE964839C9E27892E1CFA8 /* GithubSelector.swift in Sources */,
 				558398941217675B650A340BEDD46DF1 /* GithubSelectorConfig.swift in Sources */,
@@ -2031,6 +2042,7 @@
 				FC3ABD81B7A1D8FC337AEE8179D273BB /* ReposDataController.swift in Sources */,
 				6EC783276FC8894416F0570E86C688F0 /* RepoTableViewCell.swift in Sources */,
 				ED9F160BFE17D7AD37A81BF8AE00C547 /* TableViewCell.swift in Sources */,
+				158261A41F46180B00E40A28 /* CommitTableViewCell.swift in Sources */,
 				65BFBED4CAAB8BC4654A62B182AC0921 /* TableViewController.swift in Sources */,
 				88017384BEDAD359EF07ABEF7608F033 /* ViewController.swift in Sources */,
 				62443DC463B2CFADC32F0025DBC79A6F /* WrapUpFooter.swift in Sources */,
@@ -2112,7 +2124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02CC19C08253FC8EDCE96791003B8F18 /* Branches.swift in Sources */,
+				02CC19C08253FC8EDCE96791003B8F18 /* Branch.swift in Sources */,
 				0F08A6D10D3A4E7B9722B7235A1A6CEC /* Commit.swift in Sources */,
 				099037F35ADD0FF3E4DBE44C7C29A748 /* Configuration.swift in Sources */,
 				B65A6B290755C0878DDBBDB10CD3745E /* Follow.swift in Sources */,

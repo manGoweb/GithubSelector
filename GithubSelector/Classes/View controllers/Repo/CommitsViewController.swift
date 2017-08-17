@@ -1,5 +1,5 @@
 //
-//  BranchesViewController.swift
+//  CommitsViewController.swift
 //  Pods
 //
 //  Created by Ondrej Rafaj on 17/08/2017.
@@ -12,29 +12,22 @@ import Octokit
 import Presentables
 
 
-class BranchesViewController: TableViewController {
+class CommitsViewController: TableViewController {
     
-    let dataManager = BranchesDataController()
+    let dataManager = CommitsDataController()
     
-    var repo: Repository! {
+    var repo: Repository!
+    
+    var branch: Branch! {
         didSet {
-            title = repo.name
+            title = branch.name
         }
     }
+    
     
     // MARK: Data
     
     private func setupDataManager() {
-        dataManager.didTapCell = { info in
-            self.tableView.deselectRow(at: info.indexPath, animated: true)
-            let branch: Branch = self.dataManager.originalDataInSections[info.indexPath.section][info.indexPath.row]
-            
-            let c = CommitsViewController()
-            c.repo = self.repo
-            c.branch = branch
-            self.navigationController?.pushViewController(c, animated: true)
-        }
-        
         var dc: PresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)
     }
@@ -44,10 +37,10 @@ class BranchesViewController: TableViewController {
             return
         }
         
-        Octokit(config).branches(owner: repo.owner.login!, repo: repo.name!) { (response) in
+        Octokit(config).commits(owner: repo.owner.login!, repo: repo.name!, branch: branch.name!) { (response) in
             switch response {
-            case .success(let branches):
-                self.dataManager.convertData(branches: branches)
+            case .success(let commits):
+                self.dataManager.convertData(commits: commits)
             case .failure(let error):
                 print(error)
                 self.navigationController?.popViewController(animated: true)

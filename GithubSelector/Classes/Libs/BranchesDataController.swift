@@ -20,12 +20,16 @@ class BranchesDataController: PresentableTableViewDataManager {
     
     func convertData(branches: [Branch]) {
         data = []
+        indexLetters = []
+        originalDataInSections = []
         
         //let sortedBranches = branches.sorted { $0.name!.lowercased() < $1.name!.lowercased() }
         
         let sortedBranches = branches
         
         if branches.count < 12 {
+            originalDataInSections.append(branches)
+            
             let section = PresentableSection()
             for branch: Branch in sortedBranches {
                 let presenter = BranchTableViewCellPresenter()
@@ -51,10 +55,6 @@ class BranchesDataController: PresentableTableViewDataManager {
             data.append(section)
         }
         else {
-            indexLetters = []
-            originalDataInSections = []
-            
-            
             var lastSection: PresentableSection!
             var lastDataSection: [Branch]!
             

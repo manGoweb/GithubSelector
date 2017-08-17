@@ -43,37 +43,40 @@ public extension Octokit {
         }
     }
     
-//    /**
-//     Fetches a repository for a user or organization
-//     - parameter session: RequestKitURLSession, defaults to NSURLSession.sharedSession()
-//     - parameter owner: The user or organization that owns the repositories.
-//     - parameter name: The name of the repository to fetch.
-//     - parameter completion: Callback for the outcome of the fetch.
-//     */
-//    public func branch(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, completion: @escaping (_ response: Response<Repository>) -> Void) -> URLSessionDataTaskProtocol? {
-//        let router = BranchRouter.readRepository(configuration, owner, name)
-//        return router.loadJSON(session, expectedResultType: [String: AnyObject].self) { json, error in
-//            if let error = error {
-//                completion(Response.failure(error))
-//            } else {
-//                if let json = json {
-//                    let repo = Repository(json)
-//                    completion(Response.success(repo))
-//                }
-//            }
-//        }
-//    }
+    /**
+     Fetches the Repositories for a user or organization
+     - parameter session: RequestKitURLSession, defaults to NSURLSession.sharedSession()
+     - parameter owner: The user or organization that owns the repositories. If `nil`, fetches repositories for the authenticated user.
+     - parameter page: Current page for repository pagination. `1` by default.
+     - parameter perPage: Number of repositories per page. `100` by default.
+     - parameter completion: Callback for the outcome of the fetch.
+     */
+    public func branche(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, branch: String, page: String = "1", perPage: String = "100", completion: @escaping (_ response: Response<[Branch]>) -> Void) -> URLSessionDataTaskProtocol? {
+        let router = BranchRouter.readBranch(configuration, owner, repo, branch, page, perPage)
+        return router.loadJSON(session, expectedResultType: [[String: AnyObject]].self) { json, error in
+            if let error = error {
+                completion(Response.failure(error))
+            }
+            
+            if let json = json {
+                let repos = json.map { Branch($0) }
+                completion(Response.success(repos))
+            }
+        }
+    }
+    
 }
 
 // MARK: Router
 
 enum BranchRouter: Router {
     case readBranches(Configuration, String, String, String, String)
+    case readBranch(Configuration, String, String, String, String, String)
     
     var configuration: Configuration {
         switch self {
         case .readBranches(let config, _, _, _, _): return config
-        //case .readRepository(let config, _, _): return config
+        case .readBranch(let config, _, _, _, _, _): return config
         }
     }
     
@@ -89,10 +92,8 @@ enum BranchRouter: Router {
         switch self {
         case .readBranches(_, _, _, let page, let perPage):
             return ["per_page": perPage, "page": page]
-//        case .readAuthenticatedRepositories(_, let page, let perPage):
-//            return ["per_page": perPage, "page": page]
-//        case .readRepository:
-//            return [:]
+        case .readBranch(_, _, _, _, let page, let perPage):
+            return ["per_page": perPage, "page": page]
         }
     }
     
@@ -100,10 +101,8 @@ enum BranchRouter: Router {
         switch self {
         case .readBranches(_, let owner, let repo, _, _):
             return "repos/\(owner)/\(repo)/branches"
-//        case .readAuthenticatedRepositories:
-//            return "user/repos"
-//        case .readRepository(_, let owner, let name):
-//            return "repos/\(owner)/\(name)"
+        case .readBranch(_, let owner, let repo, let branch, _, _):
+            return "repos/\(owner)/\(repo)/branches/\(branch)"
         }
     }
 }
