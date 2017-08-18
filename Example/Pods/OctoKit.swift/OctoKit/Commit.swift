@@ -3,18 +3,38 @@ import RequestKit
 
 // MARK: model
 
+@objc open class CommitUser: NSObject {
+    open var name: String?
+    open var email: String?
+    open var date: Date?
+    
+    public init(_ json: [String: AnyObject]) {
+        name = json["name"] as? String
+        email = json["email"] as? String
+        date = Time.rfc3339Date(json["date"] as? String)
+    }
+}
+
 @objc open class Commit: NSObject {
     open let author: User?
+    open let authored: CommitUser?
     open let committer: User?
+    open let committed: CommitUser?
     open var sha: String?
+    open var commitMessage: String?
     open var url: String?
     open var htmlUrl: String?
     open var commentsUrl: String?
     
     public init(_ json: [String: AnyObject]) {
         author = User(json["author"] as? [String: AnyObject] ?? [:])
+        authored = CommitUser(json["commit"]?["author"] as? [String: AnyObject] ?? [:])
+        
         committer = User(json["committer"] as? [String: AnyObject] ?? [:])
+        committed = CommitUser(json["commit"]?["author"] as? [String: AnyObject] ?? [:])
+        
         sha = json["sha"] as? String
+        commitMessage = json["commit"]?["message"] as? String
         url = json["url"] as? String
         htmlUrl = json["html_url"] as? String
         commentsUrl = json["comments_url"] as? String

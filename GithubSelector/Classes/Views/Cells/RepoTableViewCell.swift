@@ -66,13 +66,13 @@ class RepoTableViewCell: TableViewCell, Presentable {
         }
         
         repoOwnerLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(repoNameLabel.snp.bottom).offset(4)
+            make.top.equalTo(repoNameLabel.snp.bottom).offset(2)
             make.left.width.equalTo(repoNameLabel)
             make.height.equalTo(14)
         }
         
         repoLastPushLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(repoOwnerLabel.snp.bottom).offset(4)
+            make.top.equalTo(repoOwnerLabel.snp.bottom).offset(2)
             make.left.equalTo(repoOwnerLabel)
             make.height.equalTo(12)
             make.bottom.lessThanOrEqualTo(-6)

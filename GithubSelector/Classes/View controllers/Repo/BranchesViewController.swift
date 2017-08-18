@@ -28,11 +28,7 @@ class BranchesViewController: TableViewController {
         dataManager.didTapCell = { info in
             self.tableView.deselectRow(at: info.indexPath, animated: true)
             let branch: Branch = self.dataManager.originalDataInSections[info.indexPath.section][info.indexPath.row]
-            
-            let c = CommitsViewController()
-            c.repo = self.repo
-            c.branch = branch
-            self.navigationController?.pushViewController(c, animated: true)
+            self.navigate(to: branch)
         }
         
         var dc: PresentableManager = dataManager
@@ -47,7 +43,13 @@ class BranchesViewController: TableViewController {
         Octokit(config).branches(owner: repo.owner.login!, repo: repo.name!) { (response) in
             switch response {
             case .success(let branches):
+                self.didLoadData = true
+                
                 self.dataManager.convertData(branches: branches)
+                
+                if branches.count == 1 {
+                    self.navigate(to: branches.first!)
+                }
             case .failure(let error):
                 print(error)
                 self.navigationController?.popViewController(animated: true)
@@ -73,6 +75,16 @@ class BranchesViewController: TableViewController {
         
     }
     
+    // MARK: Navigation
+    
+    func navigate(to branch: Branch, animated: Bool = true) {
+        let c = CommitsViewController()
+        c.repo = repo
+        c.branch = branch
+        
+        navigationController?.pushViewController(c, animated: animated)
+    }
+    
     // MARK View lifecycle
     
     override func loadView() {
@@ -88,10 +100,14 @@ class BranchesViewController: TableViewController {
         setupDataManager()
     }
     
+    var didLoadData: Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        loadData()
+        if !didLoadData {
+            loadData()
+        }
     }
     
 }

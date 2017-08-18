@@ -122,6 +122,7 @@ public extension Router {
                 completion(nil, err)
             } else {
                 if let data = data {
+                    //print(String.init(data: data, encoding: String.Encoding.utf8))
                     do {
                         let JSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? T
                         completion(JSON, nil)
