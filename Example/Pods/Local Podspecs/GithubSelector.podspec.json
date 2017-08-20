@@ -27,8 +27,8 @@
     "Presentables": [
       "~> 0.1.3"
     ],
-    "OctoKit.swift": [
-      "~> 0.7.3"
+    "NBNRequestKit": [
+      "~> 2.0.2"
     ]
   }
 }

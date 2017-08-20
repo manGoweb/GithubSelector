@@ -38,5 +38,5 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   s.dependency 'SnapKit', '~> 3.2.0'
   s.dependency 'Presentables', '~> 0.1.3'
-  s.dependency 'OctoKit.swift', '~> 0.7.3'
+  s.dependency 'NBNRequestKit', '~> 2.0.2'
 end

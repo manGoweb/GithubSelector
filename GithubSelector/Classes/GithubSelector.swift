@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Octokit
 import RequestKit
 
 

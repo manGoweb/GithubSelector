@@ -105,7 +105,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GithubSelector/GithubSelector.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NBNRequestKit/RequestKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/OctoKit.swift/Octokit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Presentables/Presentables.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
@@ -113,7 +112,6 @@ if [[ "$CONFIGURATION" == "Enterprise" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/GithubSelector/GithubSelector.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NBNRequestKit/RequestKit.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/OctoKit.swift/Octokit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Presentables/Presentables.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
