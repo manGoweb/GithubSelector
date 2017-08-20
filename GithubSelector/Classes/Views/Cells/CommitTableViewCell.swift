@@ -23,7 +23,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
     var commit: Commit? {
         didSet {
             commitMessageLabel.text = commit?.commitMessage
-            commitAuthorLabel.text = commit?.authored?.name
+            commitAuthorLabel.text = (commit?.author?.login ?? (commit?.authored?.name ?? "general.unknown".localized()))
             
             let formatter = DateFormatter()
             formatter.dateStyle = .short
@@ -60,7 +60,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         commitAuthorImageView.snp.makeConstraints { (make) in
             make.left.equalTo(20)
             make.top.equalTo(6)
-            make.bottom.equalTo(commitAuthorLabel.snp.bottom)
+            make.height.equalTo(36)
             make.width.equalTo(commitAuthorImageView.snp.height)
         }
         
@@ -68,13 +68,12 @@ class CommitTableViewCell: TableViewCell, Presentable {
             make.top.equalTo(6)
             make.left.equalTo(commitAuthorImageView.snp.right).offset(12)
             make.right.equalTo(-20)
-            make.height.equalTo(20)
+            make.height.greaterThanOrEqualTo(20)
         }
         
         commitAuthorLabel.snp.makeConstraints { (make) in
             make.top.equalTo(commitMessageLabel.snp.bottom).offset(2)
             make.left.equalTo(commitMessageLabel)
-            make.height.equalTo(14)
             make.bottom.lessThanOrEqualTo(-6)
         }
         
@@ -104,6 +103,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         commitMessageLabel.font = UIFont.systemFont(ofSize: 15)
         commitMessageLabel.textColor = .black
         commitMessageLabel.lineBreakMode = .byTruncatingTail
+        commitMessageLabel.numberOfLines = 1
         contentView.addSubview(commitMessageLabel)
         
         commitAuthorLabel.font = UIFont.boldSystemFont(ofSize: 12)

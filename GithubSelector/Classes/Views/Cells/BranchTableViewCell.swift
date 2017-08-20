@@ -38,7 +38,6 @@ class BranchTableViewCell: TableViewCell, Presentable {
             make.top.equalTo(6)
             make.left.equalTo(20)
             make.right.equalTo(-20)
-            make.height.equalTo(20)
             make.bottom.greaterThanOrEqualTo(-6)
         }
     }

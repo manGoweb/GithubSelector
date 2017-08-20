@@ -27,7 +27,8 @@ import RequestKit
     open var commentsUrl: String?
     
     public init(_ json: [String: AnyObject]) {
-        author = User(json["author"] as? [String: AnyObject] ?? [:])
+        let authorObject = json["author"] as? [String: AnyObject] ?? [:]
+        author = User(authorObject)
         authored = CommitUser(json["commit"]?["author"] as? [String: AnyObject] ?? [:])
         
         committer = User(json["committer"] as? [String: AnyObject] ?? [:])
