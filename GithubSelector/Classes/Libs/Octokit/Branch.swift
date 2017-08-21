@@ -21,14 +21,6 @@ import RequestKit
 
 public extension Octokit {
     
-    /**
-     Fetches the Repositories for a user or organization
-     - parameter session: RequestKitURLSession, defaults to NSURLSession.sharedSession()
-     - parameter owner: The user or organization that owns the repositories. If `nil`, fetches repositories for the authenticated user.
-     - parameter page: Current page for repository pagination. `1` by default.
-     - parameter perPage: Number of repositories per page. `100` by default.
-     - parameter completion: Callback for the outcome of the fetch.
-     */
     public func branches(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, page: String = "1", perPage: String = "100", completion: @escaping (_ response: Response<[Branch]>) -> Void) -> URLSessionDataTaskProtocol? {
         let router = BranchRouter.readBranches(configuration, owner, repo, page, perPage)
         return router.loadJSON(session, expectedResultType: [[String: AnyObject]].self) { json, error in
@@ -37,30 +29,23 @@ public extension Octokit {
             }
             
             if let json = json {
-                let repos = json.map { Branch($0) }
-                completion(Response.success(repos))
+                let branches = json.map { Branch($0) }
+                completion(Response.success(branches))
             }
         }
     }
     
-    /**
-     Fetches the Repositories for a user or organization
-     - parameter session: RequestKitURLSession, defaults to NSURLSession.sharedSession()
-     - parameter owner: The user or organization that owns the repositories. If `nil`, fetches repositories for the authenticated user.
-     - parameter page: Current page for repository pagination. `1` by default.
-     - parameter perPage: Number of repositories per page. `100` by default.
-     - parameter completion: Callback for the outcome of the fetch.
-     */
-    public func branche(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, branch: String, page: String = "1", perPage: String = "100", completion: @escaping (_ response: Response<[Branch]>) -> Void) -> URLSessionDataTaskProtocol? {
+    public func branch(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, branch: String, page: String = "1", perPage: String = "100", completion: @escaping (_ response: Response<Branch>) -> Void) -> URLSessionDataTaskProtocol? {
         let router = BranchRouter.readBranch(configuration, owner, repo, branch, page, perPage)
-        return router.loadJSON(session, expectedResultType: [[String: AnyObject]].self) { json, error in
+        return router.loadJSON(session, expectedResultType: [String: AnyObject].self) { json, error in
             if let error = error {
                 completion(Response.failure(error))
             }
-            
-            if let json = json {
-                let repos = json.map { Branch($0) }
-                completion(Response.success(repos))
+            else {
+                if let json = json {
+                    let branch = Branch(json)
+                    completion(Response.success(branch))
+                }
             }
         }
     }

@@ -27,6 +27,11 @@ class CommitsViewController: TableViewController {
     // MARK: Data
     
     private func setupDataManager() {
+        dataManager.didTapCell = { info in
+            self.tableView.deselectRow(at: info.indexPath, animated: true)
+            let commit: Commit = self.dataManager.originalData[info.indexPath.row]
+            self.navigate(to: commit)
+        }
         var dc: PresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)
     }
@@ -63,6 +68,16 @@ class CommitsViewController: TableViewController {
     
     func info(_ sender: UIBarButtonItem) {
         
+    }
+    
+    // MARK: Navigation
+    
+    func navigate(to commit: Commit, animated: Bool = true) {
+        let c = FilesViewController()
+        c.repo = repo
+        c.commit = commit
+        
+        navigationController?.pushViewController(c, animated: animated)
     }
     
     // MARK View lifecycle

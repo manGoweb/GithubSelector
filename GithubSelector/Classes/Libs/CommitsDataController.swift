@@ -13,14 +13,13 @@ import Presentables
 class CommitsDataController: PresentableTableViewDataManager {
     
     var indexLetters: [String] = []
-    var originalDataInSections: [[Commit]] = []
+    var originalData: [Commit] = []
     
     // MARK: Data
     
     func convertData(commits: [Commit]) {
+        originalData = commits
         data = []
-        
-        //let sortedBranches = branches.sorted { $0.name!.lowercased() < $1.name!.lowercased() }
         
         let sortedCommits = commits
         

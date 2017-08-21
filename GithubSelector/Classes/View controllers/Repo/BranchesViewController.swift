@@ -21,6 +21,8 @@ class BranchesViewController: TableViewController {
         }
     }
     
+    var didLoadData: Bool = false
+    
     // MARK: Data
     
     private func setupDataManager() {
@@ -98,8 +100,6 @@ class BranchesViewController: TableViewController {
         
         setupDataManager()
     }
-    
-    var didLoadData: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
