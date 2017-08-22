@@ -32,17 +32,25 @@ class Downloader {
     
     // MARK: Getting images
     
-    func get(url: String, cache: Bool = true, completion: @escaping ((UIImage?, Error?)->())) {
+    typealias ImageCompletion = ((GenericResult<UIImage>)->())
+    
+    func complete(_ completion: @escaping ImageCompletion, _ result: GenericResult<UIImage>) {
+        DispatchQueue.main.async {
+            completion(result)
+        }
+    }
+    
+    func get(url: String, cache: Bool = true, completion: @escaping ImageCompletion) {
         if let data = fileCache[url] {
             if let image = UIImage(data: data) {
-                completion(image, nil)
+                complete(completion, GenericResult.success(image))
                 return
             }
         }
         
         let operation = DownloaderOperation(urlString: url) { (data) in
             guard let data = data else {
-                completion(nil, DownloaderError.downloadFailed)
+                self.complete(completion, GenericResult.failure(DownloaderError.downloadFailed))
                 return
             }
             
@@ -51,11 +59,11 @@ class Downloader {
             }
             
             guard let image = UIImage(data: data) else {
-                completion(nil, DownloaderError.downloadFailed)
+                self.complete(completion, GenericResult.failure(DownloaderError.downloadFailed))
                 return
             }
             
-            completion(image, nil)
+            self.complete(completion, GenericResult.success(image))
         }
         downloadQueue.addOperation(operation)
     }
