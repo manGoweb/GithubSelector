@@ -16,6 +16,7 @@ class FilesViewController: TableViewController {
     let dataManager = FilesDataController()
     
     var repo: Repository!
+    var isRootFolder: Bool = false
     
     var commit: Commit? {
         didSet {
@@ -36,6 +37,10 @@ class FilesViewController: TableViewController {
     
     private func setupDataManager() {
         dataManager.didTapCell = { info in
+            if let _ = info.presenter as? LoadingTableViewCellPresenter {
+                return
+            }
+            
             let file: File = self.dataManager.originalData[info.indexPath.row]
             
             let c = FilesViewController()
@@ -53,28 +58,51 @@ class FilesViewController: TableViewController {
             return
         }
         
-        let sha: String = commit?.sha ?? file?.sha ?? ""
-        Octokit(config).tree(owner: repo.owner.login!, repo: repo.name!, sha: sha) { (response) in
-            switch response {
-            case .success(let tree):
-                self.didLoadData = true
-                
-                self.dataManager.convertData(tree: tree)
-                
-                if tree.files.count == 1 {
-                    //self.navigate(to: branches.first!)
+        var load: (()->()) = {
+            let sha: String = self.commit?.sha ?? self.file?.sha ?? ""
+            Octokit(config).tree(owner: self.repo.owner.login!, repo: self.repo.name!, sha: sha) { (response) in
+                switch response {
+                case .success(let tree):
+                    self.didLoadData = true
+                    
+                    self.dataManager.convertData(tree: tree)
+                    
+                    if tree.files.count == 1 {
+                        //self.navigate(to: branches.first!)
+                    }
+                case .failure(let error):
+                    print(error)
+                    self.navigationController?.popViewController(animated: true)
                 }
-            case .failure(let error):
-                print(error)
-                self.navigationController?.popViewController(animated: true)
             }
+        }
+        
+        if commit == nil && file == nil {
+            Octokit(config).commits(owner: repo.owner.login!, repo: repo.name!, branch: repo.defaultBranch!, perPage: "1") { (response) in
+                switch response {
+                case .success(let commits):
+                    if commits.count > 0 {
+                        self.commit = commits.first
+                        load()
+                    }
+                case .failure(let error):
+                    print(error)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+        else {
+            load()
         }
     }
     
     // MARK: Elements
     
     func configureNavBar() {
-        
+        if isRootFolder {
+            let branch = UIBarButtonItem(title: "files.change-branch".localized(), style: .plain, target: self, action: #selector(changeBranchTapped(_:)))
+            navigationItem.rightBarButtonItem = branch
+        }
     }
     
     func configureTableView() {
@@ -84,8 +112,10 @@ class FilesViewController: TableViewController {
     
     // MARK: Actions
     
-    func info(_ sender: UIBarButtonItem) {
-        
+    func changeBranchTapped(_ sender: UIBarButtonItem) {
+        let c = BranchesViewController()
+        c.repo = repo
+        self.navigationController?.pushViewController(c, animated: true)
     }
     
     // MARK View lifecycle

@@ -27,6 +27,10 @@ class BranchesViewController: TableViewController {
     
     private func setupDataManager() {
         dataManager.didTapCell = { info in
+            if let _ = info.presenter as? LoadingTableViewCellPresenter {
+                return
+            }
+            
             self.tableView.deselectRow(at: info.indexPath, animated: true)
             let branch: Branch = self.dataManager.originalDataInSections[info.indexPath.section][info.indexPath.row]
             self.navigate(to: branch)
@@ -60,20 +64,9 @@ class BranchesViewController: TableViewController {
     
     // MARK: Elements
     
-    func configureNavBar() {
-        let info = UIBarButtonItem(title: "general.info".localized(), style: .plain, target: self, action: #selector(info(_:)))
-        navigationItem.rightBarButtonItem = info
-    }
-    
     func configureTableView() {
         tableView.estimatedRowHeight = 64
         tableView.rowHeight = UITableViewAutomaticDimension
-    }
-    
-    // MARK: Actions
-    
-    func info(_ sender: UIBarButtonItem) {
-        
     }
     
     // MARK: Navigation
@@ -91,7 +84,6 @@ class BranchesViewController: TableViewController {
     override func loadView() {
         super.loadView()
         
-        configureNavBar()
         configureTableView()
     }
     

@@ -33,6 +33,8 @@ class LoadingTableViewCell: TableViewCell, Presentable {
         
         activityIndicator.startAnimating()
         contentView.addSubview(activityIndicator)
+        
+        selectionStyle = .none
     }
     
 }

@@ -68,7 +68,7 @@ class ViewController: UIViewController {
             fatalError("Secrets file is missing data")
         }
         
-        let config = GithubSelectorConfig()
+        let config = BaseConfig()
         config.clientId = clientId
         config.clientSecret = clientSecret
         

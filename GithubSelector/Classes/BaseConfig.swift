@@ -1,30 +1,15 @@
 //
-//  GithubSelectorConfig.swift
+//  BaseConfig.swift
 //  Pods
 //
-//  Created by Ondrej Rafaj on 14/08/2017.
+//  Created by Ondrej Rafaj on 22/08/2017.
 //
 //
 
 import Foundation
 
 
-public protocol GithubSelectorConfigurable {
-    
-    var clientId: String { get }
-    var clientSecret: String { get }
-    
-    var clientToken: String? { get set }
-    
-    var homeNavBarLogo: UIImage? { get }
-    
-    var modalTransitionStyle: UIModalTransitionStyle { get }
-    var modalPresentationStyle: UIModalPresentationStyle { get }
-    
-}
-
-
-open class GithubSelectorConfig: GithubSelectorConfigurable {
+open class BaseConfig: Configurable {
     
     // MARK: Auth
     
@@ -71,11 +56,9 @@ open class GithubSelectorConfig: GithubSelectorConfigurable {
         }
     }
     
-    // MARK: Images
+    // MARK: Selectables
     
-    open var homeNavBarLogo: UIImage? {
-        return UIImage(named: "github-logo")
-    }
+    open var selectable: AllowSelecting = .anyFile
     
     // MARK: Initialization
     

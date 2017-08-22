@@ -15,6 +15,7 @@ import RequestKit
     open var sshURL: String?
     open var cloneURL: String?
     open var htmlURL: String?
+    open var defaultBranch: String?
     open var size: Int
     open var lastPush: Date?
 
@@ -31,6 +32,7 @@ import RequestKit
             sshURL = json["ssh_url"] as? String
             cloneURL = json["clone_url"] as? String
             htmlURL = json["html_url"] as? String
+            defaultBranch = json["default_branch"] as? String
             size = json["size"] as? Int ?? 0
             lastPush = Time.rfc3339Date(json["pushed_at"] as? String)
         } else {

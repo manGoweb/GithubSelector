@@ -28,7 +28,32 @@ it, simply add the following line to your Cartfile:
 github "manGoweb/GithubSelector"
 ```
 
-## Test app
+## Usage
+
+```Swift
+// Create a new config
+let config = BaseConfig()
+config.clientId = "<your client id>"
+config.clientSecret = "<your client secret>"
+
+// Handle some callbacks ... we didn't really want to do this for you ;)
+GithubSelector.shared.didReceiveAuthToken = { token in
+    // Store received oAuth token locally (maybe keychain?)
+}
+GithubSelector.shared.logout = {
+    // User requested logout, delete locally stored oAuth token (probably from keychain?)
+}
+
+// Get your token if you got any (where did you store it? Hope not user defaults!)
+if let token = getYourToken() {
+    config.clientToken = token
+}
+
+// Present your brand new Github file selector to the user
+GithubSelector.present(inViewController: self, configuration: config)
+```
+
+## Running demo app
 
 In order to run our provided test app, please don't forget to provide your github client id and secret in `./Example/GithubSelector/Secrets.plist`. It should look something like this:
 ```xml
@@ -49,6 +74,12 @@ In order to run our provided test app, please don't forget to provide your githu
 * [Presentables](https://github.com/manGoweb/Presentables)
 * [SnapKit](https://github.com/SnapKit/SnapKit)
 
+
+## Roadmap
+
+* Customisation and introducing your own subclassed controllers
+* File preview
+* Better icons for files
 
 ## Author
 

@@ -22,7 +22,7 @@ public final class GithubSelector {
     public var didReceiveAuthToken: ((_ token: String)->())?
     public var logout: (()->())?
     
-    var configuration: GithubSelectorConfigurable!
+    var configuration: Configurable!
     
     private var _oAuthConfig: OAuthConfiguration?
     var oAuthConfig: OAuthConfiguration! {
@@ -55,7 +55,7 @@ public final class GithubSelector {
         let nc = UINavigationController(rootViewController: home)
         
         if configuration == nil {
-            configuration = GithubSelectorConfig()
+            configuration = BaseConfig()
         }
         
         nc.modalTransitionStyle = configuration.modalTransitionStyle
@@ -64,7 +64,7 @@ public final class GithubSelector {
         return nc
     }
     
-    public static func present(inViewController viewController: UIViewController, animated: Bool = true, configuration: GithubSelectorConfigurable? = nil) {
+    public static func present(inViewController viewController: UIViewController, animated: Bool = true, configuration: Configurable? = nil) {
         shared.configuration = configuration
         let base = shared.baseViewController()
         

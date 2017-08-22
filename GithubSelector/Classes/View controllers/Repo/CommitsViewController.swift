@@ -28,6 +28,10 @@ class CommitsViewController: TableViewController {
     
     private func setupDataManager() {
         dataManager.didTapCell = { info in
+            if let _ = info.presenter as? LoadingTableViewCellPresenter {
+                return
+            }
+            
             self.tableView.deselectRow(at: info.indexPath, animated: true)
             let commit: Commit = self.dataManager.originalData[info.indexPath.row]
             self.navigate(to: commit)
@@ -54,20 +58,9 @@ class CommitsViewController: TableViewController {
     
     // MARK: Elements
     
-    func configureNavBar() {
-        let info = UIBarButtonItem(title: "general.info".localized(), style: .plain, target: self, action: #selector(info(_:)))
-        navigationItem.rightBarButtonItem = info
-    }
-    
     func configureTableView() {
         tableView.estimatedRowHeight = 64
         tableView.rowHeight = UITableViewAutomaticDimension
-    }
-    
-    // MARK: Actions
-    
-    func info(_ sender: UIBarButtonItem) {
-        
     }
     
     // MARK: Navigation
@@ -85,7 +78,6 @@ class CommitsViewController: TableViewController {
     override func loadView() {
         super.loadView()
         
-        configureNavBar()
         configureTableView()
     }
     

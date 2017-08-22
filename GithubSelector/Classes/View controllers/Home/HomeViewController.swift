@@ -21,10 +21,15 @@ class HomeViewController: TableViewController {
     
     private func setupDataManager() {
         dataManager.didTapCell = { info in
+            if let _ = info.presenter as? LoadingTableViewCellPresenter {
+                return
+            }
+            
             self.tableView.deselectRow(at: info.indexPath, animated: true)
             let repo: Repository = self.dataManager.originalDataInSections[info.indexPath.section][info.indexPath.row]
             
-            let c = BranchesViewController()
+            let c = FilesViewController()
+            c.isRootFolder = true
             c.repo = repo
             self.navigationController?.pushViewController(c, animated: true)
         }
