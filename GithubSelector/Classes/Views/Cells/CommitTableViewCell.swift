@@ -51,6 +51,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
                 Downloader.shared.get(url: url) { (image, error) in
                     if image != nil {
                         self.commitAuthorImageView.image = image
+                        UIView.transition(with: self.commitAuthorImageView, duration: 0.0, options: UIViewAnimationOptions(), animations: {self.commitAuthorImageView.image = image }, completion: nil)
                     }
                 }
             }
