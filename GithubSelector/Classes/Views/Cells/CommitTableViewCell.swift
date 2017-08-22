@@ -48,9 +48,15 @@ class CommitTableViewCell: TableViewCell, Presentable {
             // User avatar
             commitAuthorImageView.image = Icons.image
             if let url = commit?.author?.avatarURL {
-                Downloader.shared.get(url: url) { (image, error) in
-                    if image != nil {
+                Downloader.shared.get(url: url) { (result) in
+                    switch result {
+                    case .success(let image):
                         self.commitAuthorImageView.image = image
+                        UIView.transition(with: self.commitAuthorImageView, duration: 0.0, animations: {
+                            self.commitAuthorImageView.image = image
+                        }, completion: nil)
+                    default:
+                        break
                     }
                 }
             }
