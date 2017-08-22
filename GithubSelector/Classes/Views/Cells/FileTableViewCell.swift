@@ -23,24 +23,33 @@ class FileTableViewCell: TableViewCell, Presentable {
         didSet {
             fileNameLabel.text = file?.path
             
+            // Filesize
             if let size = file?.size {
                 let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(size * 1000), countStyle: .file)
                 fileSizeLabel.text = "* Size: \(fileSizeWithUnit)"
             }
             else {
-                fileSizeLabel.text = "beneral.folder".localized()
+                fileSizeLabel.text = "general.folder".localized()
             }
             
+            // Mode
             if let mode = file?.mode {
-                fileModeLabel.text = "CHMOD: \(mode)"
+                fileModeLabel.text = "FP: \(String(mode.characters.suffix(3)))"
             }
+            
+            // Image
+            var icon: UIImage? = nil
             
             if file?.type == "tree" {
                 accessoryType = .disclosureIndicator
+                icon = Icons.folder
             }
             else {
                 accessoryType = .none
+                icon = Icons.file
             }
+            
+            fileIconImageView.image = icon
         }
     }
     
@@ -87,8 +96,6 @@ class FileTableViewCell: TableViewCell, Presentable {
         
         fileIconImageView.contentMode = .scaleAspectFit
         fileIconImageView.backgroundColor = .white
-        fileIconImageView.layer.borderColor = UIColor.lightGray.cgColor
-        fileIconImageView.layer.borderWidth = 2
         contentView.addSubview(fileIconImageView)
         
         fileNameLabel.font = UIFont.systemFont(ofSize: 15)

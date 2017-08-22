@@ -22,9 +22,11 @@ class CommitTableViewCell: TableViewCell, Presentable {
     
     var commit: Commit? {
         didSet {
+            // Message and author
             commitMessageLabel.text = commit?.commitMessage
             commitAuthorLabel.text = (commit?.author?.login ?? (commit?.authored?.name ?? "general.unknown".localized()))
             
+            // Commit date
             let formatter = DateFormatter()
             formatter.dateStyle = .short
             formatter.timeStyle = .medium
@@ -38,8 +40,19 @@ class CommitTableViewCell: TableViewCell, Presentable {
             }
             commitDateLabel.text = "* on \(when)"
             
+            // Commit hash
             if let hash = commit?.sha {
                 commitHashLabel.text = "#\(String(hash.characters.prefix(7)))"
+            }
+            
+            // User avatar
+            commitAuthorImageView.image = Icons.image
+            if let url = commit?.author?.avatarURL {
+                Downloader.shared.get(url: url) { (image, error) in
+                    if image != nil {
+                        self.commitAuthorImageView.image = image
+                    }
+                }
             }
         }
     }
@@ -98,6 +111,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         commitAuthorImageView.backgroundColor = .white
         commitAuthorImageView.layer.borderColor = UIColor.lightGray.cgColor
         commitAuthorImageView.layer.borderWidth = 2
+        commitAuthorImageView.clipsToBounds = true
         contentView.addSubview(commitAuthorImageView)
         
         commitMessageLabel.font = UIFont.systemFont(ofSize: 15)

@@ -36,7 +36,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  GithubSelector: 1d684148698b61635bfa73a13caaeb629bb70f5d
+  GithubSelector: 7cd11f7a47a76519ba5218cc9d8f3d55e4e4453a
   KeychainSwift: 213db04dfe7244988e61f77c72a2afb2f775954a
   NBNRequestKit: 70d514748747aca66e2e2ed17340f91d5ed6d1d4
   Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29

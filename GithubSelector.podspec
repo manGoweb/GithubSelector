@@ -30,9 +30,9 @@ Pod::Spec.new do |s|
 
   s.source_files = 'GithubSelector/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'GithubSelector' => ['GithubSelector/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'GithubSelector' => ['GithubSelector/Assets/**/*']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

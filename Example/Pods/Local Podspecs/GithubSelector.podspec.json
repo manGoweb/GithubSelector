@@ -20,6 +20,11 @@
     "ios": "10.1"
   },
   "source_files": "GithubSelector/Classes/**/*",
+  "resource_bundles": {
+    "GithubSelector": [
+      "GithubSelector/Assets/**/*"
+    ]
+  },
   "dependencies": {
     "SnapKit": [
       "~> 3.2.0"
