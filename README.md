@@ -30,16 +30,16 @@ github "manGoweb/GithubSelector"
 
 ## Test app
 
-In order to run our provided test app, please don't forget to provide your github client id and secret in `./Example/GithubSelector/Secrets.plist`
+In order to run our provided test app, please don't forget to provide your github client id and secret in `./Example/GithubSelector/Secrets.plist`. It should look something like this:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
     <dict>
         <key>clientId</key>
-        <string>your-client-id...3tc449b58f3</string>
+        <string>vw5t45t45v45y3tc449b58f3</string>
         <key>clientSecret</key>
-        <string>your-client-secret...24r24rc2c4r2c48345le</string>
+        <string>97n8v5t047tn5t7c5tcnt724r24rc2c4r2c48345le</string>
     </dict>
 </plist>
 ```
@@ -47,7 +47,7 @@ In order to run our provided test app, please don't forget to provide your githu
 ## Dependencies
 
 * [Presentables](https://github.com/manGoweb/Presentables)
-* [Octokit](https://github.com/nerdishbynature/octokit.swift)
+* [SnapKit](https://github.com/SnapKit/SnapKit)
 
 
 ## Author
