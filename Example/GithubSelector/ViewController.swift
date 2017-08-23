@@ -85,6 +85,10 @@ class ViewController: UIViewController {
             config.clientToken = token
         }
         
+        GithubSelector.shared.didSelectFile = { file in
+            self.fileLabel.text = "Selected: \(file.name)"
+        }
+        
         GithubSelector.present(inViewController: self, configuration: config)
     }
 

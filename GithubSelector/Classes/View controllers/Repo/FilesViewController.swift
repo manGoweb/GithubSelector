@@ -43,11 +43,20 @@ class FilesViewController: TableViewController {
             
             let file: File = self.dataManager.originalData[info.indexPath.row]
             
-            let c = FilesViewController()
-            c.repo = self.repo
-            c.file = file
-            
-            self.navigationController?.pushViewController(c, animated: true)
+            if file.type == "tree" {
+                let c = FilesViewController()
+                c.repo = self.repo
+                c.file = file
+                
+                self.navigationController?.pushViewController(c, animated: true)
+            }
+            else {
+                let c = FilePreviewViewController()
+                c.repo = self.repo
+                c.file = file
+                
+                self.navigationController?.pushViewController(c, animated: true)
+            }
         }
         var dc: PresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)

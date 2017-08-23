@@ -60,16 +60,16 @@ public extension Octokit {
         }
     }
     
-    public func commit(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, commitSha: String, page: String = "1", perPage: String = "100", completion: @escaping (_ response: Response<[Commit]>) -> Void) -> URLSessionDataTaskProtocol? {
-        let router = CommitRouter.readCommit(configuration, owner, repo, commitSha, page, perPage)
-        return router.loadJSON(session, expectedResultType: [[String: AnyObject]].self) { json, error in
+    public func commit(_ session: RequestKitURLSession = URLSession.shared, owner: String, repo: String, commitSha: String, completion: @escaping (_ response: Response<Commit>) -> Void) -> URLSessionDataTaskProtocol? {
+        let router = CommitRouter.readCommit(configuration, owner, repo, commitSha)
+        return router.loadJSON(session, expectedResultType: [String: AnyObject].self) { json, error in
             if let error = error {
                 completion(Response.failure(error))
-            }
-            
-            if let json = json {
-                let repos = json.map { Commit($0) }
-                completion(Response.success(repos))
+            } else {
+                if let json = json {
+                    let object = Commit(json)
+                    completion(Response.success(object))
+                }
             }
         }
     }
@@ -80,12 +80,12 @@ public extension Octokit {
 
 enum CommitRouter: Router {
     case readCommits(Configuration, String, String, String?, String, String)
-    case readCommit(Configuration, String, String, String, String, String)
+    case readCommit(Configuration, String, String, String)
     
     var configuration: Configuration {
         switch self {
         case .readCommits(let config, _, _, _, _, _): return config
-        case .readCommit(let config, _, _, _, _, _): return config
+        case .readCommit(let config, _, _, _): return config
         }
     }
     
@@ -105,8 +105,8 @@ enum CommitRouter: Router {
                 p["sha"] = branch
             }
             return p
-        case .readCommit(_, _, _, let sha, let page, let perPage):
-            return ["per_page": perPage, "page": page, "sha": sha]
+        case .readCommit(_, _, _, let sha):
+            return ["sha": sha]
         }
     }
     
@@ -114,7 +114,7 @@ enum CommitRouter: Router {
         switch self {
         case .readCommits(_, let owner, let repo, _, _, _):
             return "repos/\(owner)/\(repo)/commits"
-        case .readCommit(_, let owner, let repo, _, _, _):
+        case .readCommit(_, let owner, let repo, _):
             return "repos/\(owner)/\(repo)/commits"
         }
     }

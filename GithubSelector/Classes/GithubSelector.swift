@@ -19,6 +19,7 @@ public final class GithubSelector {
     
     public var localizable: Localizable = Localization()
     
+    public var didSelectFile: ((_ file: GithubFile)->())?
     public var didReceiveAuthToken: ((_ token: String)->())?
     public var logout: (()->())?
     
