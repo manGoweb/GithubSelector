@@ -55,6 +55,10 @@ public final class GithubSelector {
         let home = HomeViewController()
         let nc = UINavigationController(rootViewController: home)
         
+        nc.navigationBar.barStyle = .blackOpaque
+        nc.navigationBar.barTintColor = UIColor(hexTriplet: "24292E")
+        nc.navigationBar.tintColor = .white
+        
         if configuration == nil {
             configuration = BaseConfig()
         }

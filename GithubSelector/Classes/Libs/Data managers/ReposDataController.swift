@@ -59,7 +59,7 @@ class ReposDataController: PresentableTableViewDataManager {
             guard let footer = presentable as? WrapUpFooter else {
                 return
             }
-            footer.label.text = "Total: \(repos.count)"
+            footer.label.text = Localization.get("gs.general.total", repos.count)
         }
         lastSection.footer = footer
         

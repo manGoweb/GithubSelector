@@ -13,6 +13,7 @@ import SnapKit
 
 class LoginViewController: ViewController {
     
+    let githubLogo = UIImageView()
     let authButton = UIButton()
     
     
@@ -23,13 +24,24 @@ class LoginViewController: ViewController {
         
         view.backgroundColor = .white
         
+        githubLogo.contentMode = .scaleAspectFit
+        githubLogo.tintColor = .darkGray
+        githubLogo.image = Icons.logo.withRenderingMode(.alwaysTemplate)
+        view.addSubview(githubLogo)
+        
         authButton.layer.cornerRadius = 5
-        authButton.layer.borderColor = UIColor.blue.cgColor
+        authButton.layer.borderColor = UIColor.darkGray.cgColor
         authButton.layer.borderWidth = 1
-        authButton.setTitle("login.oauth-button".localized(), for: .normal)
-        authButton.setTitleColor(.blue, for: .normal)
+        authButton.setTitle(Localization.get("gs.login.oauth-button"), for: .normal)
+        authButton.setTitleColor(.darkGray, for: .normal)
         authButton.addTarget(self, action: #selector(authenticate(_:)), for: .touchUpInside)
         view.addSubview(authButton)
+        
+        githubLogo.snp.makeConstraints { (make) in
+            make.width.height.equalTo(42)
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(authButton.snp.top).offset(-60)
+        }
         
         authButton.snp.makeConstraints { (make) in
             make.left.equalTo(20)

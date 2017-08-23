@@ -29,7 +29,7 @@ class LoadingTableViewCell: TableViewCell, Presentable {
     override func configureElements() {
         super.configureElements()
         
-        textLabel?.text = "general.loading".localized()
+        textLabel?.text = Localization.get("gs.general.loading")
         
         activityIndicator.startAnimating()
         contentView.addSubview(activityIndicator)

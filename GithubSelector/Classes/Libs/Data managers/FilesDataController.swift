@@ -51,7 +51,7 @@ class FilesDataController: PresentableTableViewDataManager {
             guard let footer = presentable as? WrapUpFooter else {
                 return
             }
-            footer.label.text = "Total: \(sortedFiles.count)"
+            footer.label.text = Localization.get("gs.general.total", sortedFiles.count)
         }
         section.footer = footer
         

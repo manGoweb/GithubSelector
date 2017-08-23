@@ -41,7 +41,7 @@ class CommitsDataController: PresentableTableViewDataManager {
             guard let footer = presentable as? WrapUpFooter else {
                 return
             }
-            footer.label.text = "Total: \(commits.count)"
+            footer.label.text = Localization.get("gs.general.total", commits.count)
         }
         section.footer = footer
         

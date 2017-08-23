@@ -11,17 +11,14 @@ import Foundation
 
 class Localization: Localizable {
     
-    func get(_ key: String) -> String {
+    static func get(_ key: String) -> String {
         return NSLocalizedString(key, comment: key)
     }
     
-}
-
-
-extension String {
-    
-    func localized() -> String {
-        return GithubSelector.shared.localizable.get(self)
+    static func get(_ key: String, _ arguments: CVarArg...) -> String {
+        let format: String = get(key)
+        return String(format: format, arguments: arguments)
     }
     
 }
+

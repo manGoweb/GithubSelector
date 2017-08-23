@@ -79,7 +79,7 @@ class HomeViewController: TableViewController {
         let close = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(close(_:)))
         navigationItem.leftBarButtonItem = close
         
-        let logout = UIBarButtonItem(title: "general.logout".localized(), style: .plain, target: self, action: #selector(logout(_:)))
+        let logout = UIBarButtonItem(title: Localization.get("gs.repos.logout"), style: .plain, target: self, action: #selector(logout(_:)))
         navigationItem.rightBarButtonItem = logout
     }
     
@@ -119,6 +119,14 @@ class HomeViewController: TableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let logoView = UIImageView()
+        logoView.tintColor = .white
+        logoView.contentMode = .scaleAspectFit
+        let img = Icons.logo.withRenderingMode(.alwaysTemplate)
+        logoView.image = img
+        logoView.frame = CGRect(x: 0, y: 0, width: 60, height: 30)
+        navigationItem.titleView = logoView
         
         if GithubSelector.shared.configuration.clientToken == nil {
             let nc = UINavigationController(rootViewController: LoginViewController())

@@ -109,7 +109,7 @@ class FilesViewController: TableViewController {
     
     func configureNavBar() {
         if isRootFolder {
-            let branch = UIBarButtonItem(title: "files.change-branch".localized(), style: .plain, target: self, action: #selector(changeBranchTapped(_:)))
+            let branch = UIBarButtonItem(title: Localization.get("gs.files.change-branch"), style: .plain, target: self, action: #selector(changeBranchTapped(_:)))
             navigationItem.rightBarButtonItem = branch
         }
     }

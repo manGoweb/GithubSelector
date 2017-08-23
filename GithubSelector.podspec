@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.source_files = 'GithubSelector/Classes/**/*'
   
   s.resource_bundles = {
-    'GithubSelector' => ['GithubSelector/Assets/**/*']
+    'GithubSelector' => ['GithubSelector/Localization/*.lproj']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'

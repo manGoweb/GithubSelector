@@ -11,6 +11,7 @@ import Foundation
 
 public protocol Localizable {
     
-    func get(_ key: String) -> String
+    static func get(_ key: String) -> String
+    static func get(_ key: String, _ arguments: CVarArg...) -> String
     
 }

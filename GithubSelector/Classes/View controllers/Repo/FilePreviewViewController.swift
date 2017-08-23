@@ -27,7 +27,7 @@ class FilePreviewViewController: ViewController {
     // MARK: Elements
     
     func configureNavBar() {
-        let branch = UIBarButtonItem(title: "files.select".localized(), style: .plain, target: self, action: #selector(selectFileTapped(_:)))
+        let branch = UIBarButtonItem(title: Localization.get("gs.files.select"), style: .done, target: self, action: #selector(selectFileTapped(_:)))
         branch.isEnabled = false
         navigationItem.rightBarButtonItem = branch
     }

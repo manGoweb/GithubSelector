@@ -22,7 +22,7 @@
   "source_files": "GithubSelector/Classes/**/*",
   "resource_bundles": {
     "GithubSelector": [
-      "GithubSelector/Assets/**/*"
+      "GithubSelector/Localization/*.lproj"
     ]
   },
   "dependencies": {

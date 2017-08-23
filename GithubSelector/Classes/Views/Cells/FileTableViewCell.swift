@@ -24,17 +24,18 @@ class FileTableViewCell: TableViewCell, Presentable {
             fileNameLabel.text = file?.path
             
             // Filesize
-            if let size = file?.size {
-                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(size * 1000), countStyle: .file)
-                fileSizeLabel.text = "* Size: \(fileSizeWithUnit)"
+            if let size = file?.size, file?.type != "tree" {
+                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(size), countStyle: .file)
+                fileSizeLabel.text = Localization.get("gs.files.size", fileSizeWithUnit)
+                
+                // Mode
+                if let mode = file?.mode {
+                    fileModeLabel.text = Localization.get("gs.files.chmod", String(mode.characters.suffix(3)))
+                }
             }
             else {
-                fileSizeLabel.text = "general.folder".localized()
-            }
-            
-            // Mode
-            if let mode = file?.mode {
-                fileModeLabel.text = "FP: \(String(mode.characters.suffix(3)))"
+                fileSizeLabel.text = Localization.get("gs.files.folder")
+                fileModeLabel.text = nil
             }
             
             // Image
@@ -42,11 +43,11 @@ class FileTableViewCell: TableViewCell, Presentable {
             
             if file?.type == "tree" {
                 accessoryType = .disclosureIndicator
-                icon = Icons.folder
+                icon = Icons.folder.withRenderingMode(.alwaysTemplate)
             }
             else {
                 accessoryType = .none
-                icon = Icons.file
+                icon = Icons.file.withRenderingMode(.alwaysTemplate)
             }
             
             fileIconImageView.image = icon
@@ -66,8 +67,8 @@ class FileTableViewCell: TableViewCell, Presentable {
         
         fileIconImageView.snp.makeConstraints { (make) in
             make.left.equalTo(20)
-            make.top.equalTo(6)
-            make.height.equalTo(36)
+            make.centerY.equalToSuperview()
+            make.height.equalTo(16)
             make.width.equalTo(fileIconImageView.snp.height)
         }
         
@@ -87,7 +88,7 @@ class FileTableViewCell: TableViewCell, Presentable {
         fileModeLabel.snp.makeConstraints { (make) in
             make.top.height.equalTo(fileSizeLabel)
             make.left.equalTo(fileSizeLabel.snp.right).offset(20)
-            make.right.lessThanOrEqualTo(fileNameLabel)
+            make.right.equalTo(fileNameLabel)
         }
     }
     
@@ -96,6 +97,7 @@ class FileTableViewCell: TableViewCell, Presentable {
         
         fileIconImageView.contentMode = .scaleAspectFit
         fileIconImageView.backgroundColor = .white
+        fileIconImageView.tintColor = .darkGray
         contentView.addSubview(fileIconImageView)
         
         fileNameLabel.font = UIFont.systemFont(ofSize: 15)

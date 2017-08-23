@@ -18,8 +18,8 @@ class RepoTableViewCell: TableViewCell, Presentable {
     var repoLastPushLabel = UILabel()
     var repoSizeLabel = UILabel()
     
-    var privateImageView = UILabel()
-    var forkImageView = UILabel()
+    var privateImageView = UIImageView()
+    var forkImageView = UIImageView()
     
     var repo: Repository? {
         didSet {
@@ -38,17 +38,15 @@ class RepoTableViewCell: TableViewCell, Presentable {
                 when = formatter.string(from: lastPush)
             }
             else {
-                when = "general.never".localized()
+                when = Localization.get("gs.repos.last_push.never")
             }
-            repoLastPushLabel.text = "* Last push: \(when)"
+            repoLastPushLabel.text = Localization.get("gs.repos.last_push", when)
             
-            let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(repo.size * 1000), countStyle: .file)
-            repoSizeLabel.text = "* Size: \(fileSizeWithUnit)"
+            let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64((repo.size * 1000)), countStyle: .file)
+            repoSizeLabel.text = Localization.get("gs.repos.filesize", fileSizeWithUnit)
             
-            privateImageView.text = repo.isPrivate ? "P" : "O"
-            privateImageView.backgroundColor = repo.isPrivate ? .red : .green
-            forkImageView.text = (repo.isFork ?? false) ? "F" : ""
-            forkImageView.backgroundColor = (repo.isFork ?? false) ? .orange : .clear
+            privateImageView.image = repo.isPrivate ? Icons.locked : Icons.unlocked
+            forkImageView.image = (repo.isFork ?? false) ? Icons.fork : nil
         }
     }
     
@@ -83,7 +81,7 @@ class RepoTableViewCell: TableViewCell, Presentable {
         privateImageView.snp.makeConstraints { (make) in
             make.top.equalTo(repoNameLabel)
             make.right.equalTo(-4)
-            make.width.height.equalTo(20)
+            make.width.height.equalTo(12)
         }
         
         forkImageView.snp.makeConstraints { (make) in
@@ -114,14 +112,10 @@ class RepoTableViewCell: TableViewCell, Presentable {
         repoSizeLabel.textColor = .lightGray
         contentView.addSubview(repoSizeLabel)
         
-        privateImageView.font = UIFont.systemFont(ofSize: 10)
-        privateImageView.textColor = .white
-        privateImageView.textAlignment = .center
+        privateImageView.contentMode = .scaleAspectFit
         contentView.addSubview(privateImageView)
         
-        forkImageView.font = UIFont.systemFont(ofSize: 10)
-        forkImageView.textColor = .white
-        forkImageView.textAlignment = .center
+        forkImageView.contentMode = .scaleAspectFit
         contentView.addSubview(forkImageView)
     }
     

@@ -49,6 +49,19 @@ if let token = getYourToken() {
     config.clientToken = token
 }
 
+// User has finally decided to select a file
+GithubSelector.shared.didSelectFile = { file in
+    /*
+    Access the following on your returned file
+    
+    public let data: Data
+    public let name: String
+    public let url: String
+    public let mode: String
+    public let size: Int
+    */
+}
+
 // Present your brand new Github file selector to the user
 GithubSelector.present(inViewController: self, configuration: config)
 ```
@@ -68,6 +81,44 @@ In order to run our provided test app, please don't forget to provide your githu
     </dict>
 </plist>
 ```
+
+## Localization
+
+We have intentionaly left out any localizations out of the GithubSelector in order to allow maximum customisation. There are two ways to localise:
+
+#### NSLocalizedString
+
+Simple way to localize GithubSelector is to add the following localization keys into your `Localizable.strins` file.
+```C
+// General
+"gs.general.total" = "Total: %d";
+"gs.general.unknown" = "Unknown";
+"gs.general.never" = "Never";
+"gs.general.loading" = "Loading ...";
+
+// Login
+"gs.login.oauth-button" = "Login to github.com";
+
+// Repos
+"gs.repos.logout" = "Logout";
+"gs.repos.filesize" = "Size: %@";
+"gs.repos.last_push.never" = "Never";
+"gs.repos.last_push" = "Last push: %@";
+
+// Files
+"gs.files.folder" = "Folder";
+"gs.files.chmod" = "#%@";
+"gs.files.size" = "Size: %@";
+"gs.files.change-branch" = "Branches";
+"gs.files.select" = "Select";
+
+// Commits
+"gs.commits.commited_on" = "on %@";
+```
+
+#### Custom localization
+
+For an absolutely super amazing custom localization, please create a class conforming to a `Localizable` protocol and than assign it to `var localizable: Localizable` on the shared GithubSelector.
 
 ## Dependencies
 

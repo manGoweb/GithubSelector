@@ -24,7 +24,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         didSet {
             // Message and author
             commitMessageLabel.text = commit?.commitMessage
-            commitAuthorLabel.text = (commit?.author?.login ?? (commit?.authored?.name ?? "general.unknown".localized()))
+            commitAuthorLabel.text = (commit?.author?.login ?? (commit?.authored?.name ?? Localization.get("gs.general.unknown")))
             
             // Commit date
             let formatter = DateFormatter()
@@ -36,9 +36,9 @@ class CommitTableViewCell: TableViewCell, Presentable {
                 when = formatter.string(from: lastPush)
             }
             else {
-                when = "general.never".localized()
+                when = Localization.get("gs.general.never")
             }
-            commitDateLabel.text = "* on \(when)"
+            commitDateLabel.text = Localization.get("gs.commits.commited_on", when)
             
             // Commit hash
             if let hash = commit?.sha {
@@ -46,14 +46,13 @@ class CommitTableViewCell: TableViewCell, Presentable {
             }
             
             // User avatar
-            commitAuthorImageView.image = Icons.image
+            commitAuthorImageView.image = Icons.image.withRenderingMode(.alwaysTemplate)
             if let url = commit?.author?.avatarURL {
                 Downloader.shared.get(url: url) { (result) in
                     switch result {
                     case .success(let image):
-                        self.commitAuthorImageView.image = image
                         UIView.transition(with: self.commitAuthorImageView, duration: 0.0, animations: {
-                            self.commitAuthorImageView.image = image
+                            self.commitAuthorImageView.image = image.withRenderingMode(.alwaysOriginal)
                         }, completion: nil)
                     default:
                         break
@@ -104,7 +103,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         commitHashLabel.snp.makeConstraints { (make) in
             make.top.height.equalTo(commitAuthorLabel)
             make.left.equalTo(commitDateLabel.snp.right).offset(20)
-            make.right.lessThanOrEqualTo(commitMessageLabel)
+            make.right.equalTo(commitMessageLabel)
         }
     }
     
@@ -118,6 +117,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         commitAuthorImageView.layer.borderColor = UIColor.lightGray.cgColor
         commitAuthorImageView.layer.borderWidth = 2
         commitAuthorImageView.clipsToBounds = true
+        commitAuthorImageView.tintColor = UIColor(white: 0, alpha: 0.1)
         contentView.addSubview(commitAuthorImageView)
         
         commitMessageLabel.font = UIFont.systemFont(ofSize: 15)
@@ -139,6 +139,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
         commitHashLabel.font = UIFont.boldSystemFont(ofSize: 12)
         commitHashLabel.textColor = .darkGray
         commitHashLabel.lineBreakMode = .byTruncatingTail
+        commitHashLabel.textAlignment = .right
         contentView.addSubview(commitHashLabel)
     }
     

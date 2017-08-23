@@ -47,7 +47,7 @@ class BranchesDataController: PresentableTableViewDataManager {
                 guard let footer = presentable as? WrapUpFooter else {
                     return
                 }
-                footer.label.text = "Total: \(branches.count)"
+                footer.label.text = Localization.get("gs.general.total", branches.count)
             }
             section.footer = footer
             
@@ -88,7 +88,7 @@ class BranchesDataController: PresentableTableViewDataManager {
                 guard let footer = presentable as? WrapUpFooter else {
                     return
                 }
-                footer.label.text = "Total: \(branches.count)"
+                footer.label.text = Localization.get("gs.general.total", branches.count)
             }
             lastSection.footer = footer
             
