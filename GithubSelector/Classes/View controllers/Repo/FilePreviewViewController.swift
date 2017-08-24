@@ -76,7 +76,7 @@ class FilePreviewViewController: ViewController {
             return
         }
         
-        Octokit(config).blob(owner: self.repo.owner.login!, repo: self.repo.name!, fileSha: file.sha!) { (response) in
+        _ = Octokit(config).blob(owner: self.repo.owner.login!, repo: self.repo.name!, fileSha: file.sha!) { (response) in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let blob):
@@ -87,7 +87,7 @@ class FilePreviewViewController: ViewController {
                     self.data = data
                     self.presentView.fileData = data
                     self.navigationItem.rightBarButtonItem?.isEnabled = true
-                case .failure(let error):
+                case .failure(_):
                     self.navigationController?.popViewController(animated: true)
                 }
             }

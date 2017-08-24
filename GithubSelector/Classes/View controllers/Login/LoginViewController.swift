@@ -57,7 +57,7 @@ class LoginViewController: ViewController {
         guard let url = githubSelector.oAuthConfig.authenticate() else {
             return
         }
-        UIApplication.shared.openURL(url)
+        UIApplication.shared.open(url)
     }
     
     // MARK: View lifecycle

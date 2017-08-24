@@ -19,7 +19,7 @@ class FilesDataController: PresentableTableViewDataManager {
     func convertData(tree: Tree) {
         data = []
         
-        var sortedFiles: [File] = tree.files.sorted { $0.path!.lowercased() < $1.path!.lowercased() }
+        let sortedFiles: [File] = tree.files.sorted { $0.path!.lowercased() < $1.path!.lowercased() }
         
         let folders: [File] = sortedFiles.filter { (file) -> Bool in
             return file.type == "tree"

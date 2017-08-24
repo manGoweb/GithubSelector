@@ -67,9 +67,9 @@ class FilesViewController: TableViewController {
             return
         }
         
-        var load: (()->()) = {
+        let load: (()->()) = {
             let sha: String = self.commit?.sha ?? self.file?.sha ?? ""
-            Octokit(config).tree(owner: self.repo.owner.login!, repo: self.repo.name!, sha: sha) { (response) in
+            _ = Octokit(config).tree(owner: self.repo.owner.login!, repo: self.repo.name!, sha: sha) { (response) in
                 switch response {
                 case .success(let tree):
                     self.didLoadData = true
@@ -87,7 +87,7 @@ class FilesViewController: TableViewController {
         }
         
         if commit == nil && file == nil {
-            Octokit(config).commits(owner: repo.owner.login!, repo: repo.name!, branch: repo.defaultBranch!, perPage: "1") { (response) in
+            _ = Octokit(config).commits(owner: repo.owner.login!, repo: repo.name!, branch: repo.defaultBranch!, perPage: "1") { (response) in
                 switch response {
                 case .success(let commits):
                     if commits.count > 0 {

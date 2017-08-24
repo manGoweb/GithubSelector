@@ -72,7 +72,7 @@ class Downloader {
 
 fileprivate class DownloaderOperation: Operation {
     
-    private typealias CompletionClosure = ((Data?)->())
+    typealias CompletionClosure = ((Data?)->())
     
     private let url: URL
     
