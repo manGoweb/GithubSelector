@@ -46,7 +46,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
             }
             
             // User avatar
-            commitAuthorImageView.image = Icons.image.withRenderingMode(.alwaysTemplate)
+            commitAuthorImageView.image = Icons.user.withRenderingMode(.alwaysTemplate)
             if let url = commit?.author?.avatarURL {
                 Downloader.shared.get(url: url) { (result) in
                     switch result {

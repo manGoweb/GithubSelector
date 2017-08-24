@@ -13,6 +13,7 @@ import SnapKit
 
 class PresentTextView: View, PresentView {
     
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var textView = UITextView()
     
     var file: File!
@@ -20,6 +21,10 @@ class PresentTextView: View, PresentView {
     var fileData: Data? {
         didSet {
             textView.text = String(data: fileData!, encoding: String.Encoding.utf8)
+            
+            UIView.animate(withDuration: 0.3) {
+                self.activityIndicator.alpha = 0
+            }
         }
     }
     
@@ -32,13 +37,21 @@ class PresentTextView: View, PresentView {
         textView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        
+        activityIndicator.snp.makeConstraints { (make) in
+            make.edges.equalTo(textView)
+        }
     }
     
     override func configureElements() {
         super.configureElements()
         
         textView.isEditable = false
+        textView.text = Localization.get("gs.general.loading")
         addSubview(textView)
+        
+        activityIndicator.startAnimating()
+        addSubview(activityIndicator)
     }
     
 }

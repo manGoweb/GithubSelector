@@ -97,4 +97,9 @@ public final class GithubSelector {
         configuration = config
     }
     
+    public init(configuration config: Configurable, url: URL) {
+        configuration = config
+        handle(openURL: url)
+    }
+    
 }

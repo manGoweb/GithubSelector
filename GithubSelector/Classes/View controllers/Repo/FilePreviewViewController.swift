@@ -55,8 +55,7 @@ class FilePreviewViewController: ViewController {
     
     func configureElements() {
         if (file.path!.contains(".jpg") || file.path!.contains(".jpeg") || file.path!.contains(".png")) && file.size <= maxFileSize {
-            //createImageView()
-            createFileView()
+            createImageView()
         }
         else {
             if file.size > maxFileSize {

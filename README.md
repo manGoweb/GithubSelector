@@ -61,18 +61,16 @@ in your `AppDelegate` you have to put a deeplink handler in order to see incomin
 
 ```Swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    // Create a new config
+    // Create a new config (we recommend you subclass BaseConfig and initialize it with the right values for reusability)
     let config = BaseConfig()
     config.clientId = "<your client id>"
     config.clientSecret = "<your client secret>"
     
     // Store the oAuth token ... we didn't really want to do this for you ;)
-    selector.didReceiveAuthToken = { token in
+    GithubSelector(configuration: config, url: url).didReceiveAuthToken = { token in
         // Store received oAuth token locally (maybe keychain?)
     }
 
-    let selector = GithubSelector(config)
-    selector.handle(openURL: url)
     return true
 }
 ```
@@ -113,16 +111,6 @@ selector.didSelectFile = { file in
 
 // Present your brand new Github file selector to the user
 selector.present(inViewController: self, configuration: config)
-```
-
-In your AppDelegate you have to put a deeplink handler in order to see incoming authentications:
-
-```Swift
-func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    let selector = GithubSelector()
-    selector.handle(openURL: url)
-    return true
-}
 ```
 
 ## Running demo app

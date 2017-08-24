@@ -25,11 +25,14 @@ class PresentFileView: View, PresentView {
     
     var fileData: Data? {
         didSet {
-            
+            UIView.animate(withDuration: 0.3) { 
+                self.activityIndicator.alpha = 0
+            }
         }
     }
     
-    let iconImageView = UIImageView()
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let imageView = UIImageView()
     let fileNameLabel = UILabel()
     let fileSizeLabel = UILabel()
     let fileModeLabel = UILabel()
@@ -40,16 +43,20 @@ class PresentFileView: View, PresentView {
     override func layoutElements() {
         super.layoutElements()
         
-        iconImageView.snp.makeConstraints { (make) in
+        imageView.snp.makeConstraints { (make) in
             make.bottom.equalTo(snp.centerY).offset(-60)
             make.height.equalTo(100)
             make.left.equalTo(44)
             make.right.equalTo(-44)
         }
         
+        activityIndicator.snp.makeConstraints { (make) in
+            make.edges.equalTo(imageView)
+        }
+        
         fileNameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(iconImageView.snp.bottom).offset(44)
-            make.left.right.equalTo(iconImageView)
+            make.top.equalTo(imageView.snp.bottom).offset(44)
+            make.left.right.equalTo(imageView)
         }
         
         fileSizeLabel.snp.makeConstraints { (make) in
@@ -64,10 +71,14 @@ class PresentFileView: View, PresentView {
     }
     
     private func configureImageView() {
-        iconImageView.tintColor = .gray
-        iconImageView.image = Icons.file.withRenderingMode(.alwaysTemplate)
-        iconImageView.contentMode = .scaleAspectFit
-        addSubview(iconImageView)
+        imageView.tintColor = .gray
+        imageView.image = Icons.file.withRenderingMode(.alwaysTemplate)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        addSubview(imageView)
+        
+        activityIndicator.startAnimating()
+        addSubview(activityIndicator)
     }
     
     private func configureLabels() {

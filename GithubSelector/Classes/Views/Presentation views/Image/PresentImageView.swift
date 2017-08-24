@@ -10,25 +10,33 @@ import Foundation
 import UIKit
 
 
-class PresentImageView: View, PresentView {
+class PresentImageView: PresentFileView {
     
-    var file: File!
-    
-    var fileData: Data? {
+    override var fileData: Data? {
         didSet {
+            UIView.animate(withDuration: 0.3) {
+                self.activityIndicator.alpha = 0
+            }
             
+            guard let fileData = fileData else {
+                return
+            }
+            if let img = UIImage(data: fileData) {
+                if img.size.width < imageView.frame.width && img.size.height < imageView.frame.height {
+                    imageView.contentMode = .center
+                }
+                imageView.image = img
+            }
         }
     }
     
     
     // MARK: Elements
     
-    override func layoutElements() {
-        super.layoutElements()
-    }
-    
     override func configureElements() {
         super.configureElements()
+        
+        imageView.image = Icons.image
     }
     
 }
