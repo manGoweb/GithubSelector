@@ -124,8 +124,8 @@ public extension Router {
                 if let data = data {
                     
                     do {
-                        let string: String = (try? String.init(data: data, encoding: String.Encoding.utf8) ?? "nothin a :(") ?? "nothin b :("
-                        print(string)
+//                        let string: String = (try? String.init(data: data, encoding: String.Encoding.utf8) ?? "nothin a :(") ?? "nothin b :("
+//                        print(string)
                         
                         let JSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? T
 //                        let prettyData = try JSONSerialization.data(withJSONObject: JSON, options: JSONSerialization.WritingOptions.prettyPrinted)

@@ -15,6 +15,8 @@ class PresentTextView: View, PresentView {
     
     var textView = UITextView()
     
+    var file: File!
+    
     var fileData: Data? {
         didSet {
             textView.text = String(data: fileData!, encoding: String.Encoding.utf8)

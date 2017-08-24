@@ -29,6 +29,7 @@ class HomeViewController: TableViewController {
             let repo: Repository = self.dataManager.originalDataInSections[info.indexPath.section][info.indexPath.row]
             
             let c = FilesViewController()
+            c.githubSelector = self.githubSelector
             c.isRootFolder = true
             c.repo = repo
             self.navigationController?.pushViewController(c, animated: true)
@@ -41,7 +42,7 @@ class HomeViewController: TableViewController {
     let perPage: Int = 100
     
     private func loadData() {
-        guard let config = GithubSelector.shared.tokenConfig else {
+        guard let config = githubSelector.tokenConfig else {
             return
         }
         
@@ -102,8 +103,8 @@ class HomeViewController: TableViewController {
     }
     
     func logout(_ sender: UIBarButtonItem) {
-        GithubSelector.shared.configuration.clientToken = nil
-        GithubSelector.shared.logout?()
+        githubSelector.configuration.clientToken = nil
+        githubSelector.logout?()
         
         dismiss(animated: true, completion: nil)
     }
@@ -128,8 +129,10 @@ class HomeViewController: TableViewController {
         logoView.frame = CGRect(x: 0, y: 0, width: 60, height: 30)
         navigationItem.titleView = logoView
         
-        if GithubSelector.shared.configuration.clientToken == nil {
-            let nc = UINavigationController(rootViewController: LoginViewController())
+        if githubSelector?.configuration.clientToken == nil {
+            let c = LoginViewController()
+            c.githubSelector = githubSelector
+            let nc = UINavigationController(rootViewController: c)
             nc.modalTransitionStyle = .crossDissolve
             present(nc, animated: true, completion: nil)
         }

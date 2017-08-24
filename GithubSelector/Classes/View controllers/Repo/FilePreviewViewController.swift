@@ -11,6 +11,9 @@ import Foundation
 
 class FilePreviewViewController: ViewController {
     
+    //let maxFileSize: Int = 1000000
+    let maxFileSize: Int = 100
+    
     var repo: Repository!
     
     var file: File! {
@@ -52,24 +55,26 @@ class FilePreviewViewController: ViewController {
     }
     
     func configureElements() {
-        if file.path!.contains(".jpg") || file.path!.contains(".jpeg") || file.path!.contains(".png") {
-            createImageView()
+        if (file.path!.contains(".jpg") || file.path!.contains(".jpeg") || file.path!.contains(".png")) && file.size <= maxFileSize {
+            //createImageView()
+            createFileView()
         }
         else {
-            if file.size > 9999 {
+            if file.size > maxFileSize {
                 createFileView()
             }
             else {
                 createTextView()
             }
         }
+        presentView.file = file
         addAndStylePresentView()
     }
     
     // MARK: Data
     
     private func loadData() {
-        guard let config = GithubSelector.shared.tokenConfig else {
+        guard let config = githubSelector.tokenConfig else {
             return
         }
         
@@ -85,7 +90,6 @@ class FilePreviewViewController: ViewController {
                     self.presentView.fileData = data
                     self.navigationItem.rightBarButtonItem?.isEnabled = true
                 case .failure(let error):
-                    print(error)
                     self.navigationController?.popViewController(animated: true)
                 }
             }
@@ -96,7 +100,7 @@ class FilePreviewViewController: ViewController {
     
     func selectFileTapped(_ sender: UIBarButtonItem) {
         let githubFile = GithubFile(data: data!, name: file.path!, url: file.url!, mode: file.mode!, size: file.size)
-        GithubSelector.shared.didSelectFile?(githubFile)
+        githubSelector.didSelectFile?(githubFile)
         
         dismiss(animated: true, completion: nil)
     }

@@ -54,7 +54,7 @@ class LoginViewController: ViewController {
     // MARK: Actions
     
     func authenticate(_ sender: UIButton) {
-        guard let url = GithubSelector.shared.oAuthConfig.authenticate() else {
+        guard let url = githubSelector.oAuthConfig.authenticate() else {
             return
         }
         UIApplication.shared.openURL(url)
@@ -77,7 +77,7 @@ class LoginViewController: ViewController {
     // MARK: Notifications
     
     func loginNotificationRecieved(_ notification: Notification) {
-        if GithubSelector.shared.configuration.clientToken != nil {
+        if githubSelector.configuration.clientToken != nil {
             dismiss(animated: true, completion: nil)
         }
     }

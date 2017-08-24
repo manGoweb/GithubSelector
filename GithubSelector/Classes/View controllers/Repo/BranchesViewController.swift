@@ -41,7 +41,7 @@ class BranchesViewController: TableViewController {
     }
     
     private func loadData() {
-        guard let config = GithubSelector.shared.tokenConfig else {
+        guard let config = githubSelector.tokenConfig else {
             return
         }
         
@@ -73,9 +73,9 @@ class BranchesViewController: TableViewController {
     
     func navigate(to branch: Branch, animated: Bool = true) {
         let c = CommitsViewController()
+        c.githubSelector = githubSelector
         c.repo = repo
         c.branch = branch
-        
         navigationController?.pushViewController(c, animated: animated)
     }
     

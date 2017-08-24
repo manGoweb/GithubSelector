@@ -15,8 +15,6 @@ let GithubSelectorLoginChangedNotification = Notification.Name("GithubSelectorLo
 
 public final class GithubSelector {
     
-    static public let shared = GithubSelector()
-    
     public var localizable: Localizable = Localization()
     
     public var didSelectFile: ((_ file: GithubFile)->())?
@@ -53,15 +51,17 @@ public final class GithubSelector {
     
     public func baseViewController() -> UINavigationController {
         let home = HomeViewController()
+        
+        if configuration == nil {
+            configuration = BaseConfig()
+        }
+        home.githubSelector = self
+        
         let nc = UINavigationController(rootViewController: home)
         
         nc.navigationBar.barStyle = .blackOpaque
         nc.navigationBar.barTintColor = UIColor(hexTriplet: "24292E")
         nc.navigationBar.tintColor = .white
-        
-        if configuration == nil {
-            configuration = BaseConfig()
-        }
         
         nc.modalTransitionStyle = configuration.modalTransitionStyle
         nc.modalPresentationStyle = configuration.modalPresentationStyle
@@ -69,9 +69,9 @@ public final class GithubSelector {
         return nc
     }
     
-    public static func present(inViewController viewController: UIViewController, animated: Bool = true, configuration: Configurable? = nil) {
-        shared.configuration = configuration
-        let base = shared.baseViewController()
+    public func present(inViewController viewController: UIViewController, animated: Bool = true, configuration config: Configurable? = nil) {
+        configuration = config
+        let base = baseViewController()
         
         viewController.present(base, animated: animated, completion: nil)
     }
@@ -95,7 +95,7 @@ public final class GithubSelector {
     
     // MARK: - Private interface
     
-    init() {
+    public init() {
         
     }
     

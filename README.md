@@ -5,6 +5,12 @@
 [![License](https://img.shields.io/cocoapods/l/GithubSelector.svg?style=flat)](http://cocoapods.org/pods/GithubSelector)
 [![Platform](https://img.shields.io/cocoapods/p/GithubSelector.svg?style=flat)](http://cocoapods.org/pods/GithubSelector)
 
+Ever had the need to browse your github repo from your iOS app, select file and load it? No? Well, me neither ... at least till two hours before my first commit here.
+
+GithubSelector is a file browser that allows you to brows through all your repos using github API V3. You can browse any repo you have access to, private or public, yours or a fork while switching branches or selecting any historic commit you might need.
+
+Once done, file will be downloaded and passed back onto you in closure with all the info and content of your file as plain `Data`.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -30,17 +36,54 @@ github "manGoweb/GithubSelector"
 
 ## Usage
 
+#### Authentication
+
+Add a new url scheme to your apps `Info.plist`, it may look something like this:
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLIconFile</key>
+        <string></string>
+        <key>CFBundleURLName</key>
+        <string>githubselector1</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+            <string>githubselector1</string>
+        </array>
+    </dict>
+</array>
+```
+
+in your `AppDelegate` you have to put a deeplink handler in order to see incoming authentications:
+
 ```Swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    let selector = GithubSelector()
+    selector.handle(openURL: url)
+    return true
+}
+```
+
+#### Implementation
+
+In your view controller (most likely), create a configuration, handle callback methods and eventually present the selector.
+
+```Swift
+let selector = GithubSelector()
+
 // Create a new config
 let config = BaseConfig()
 config.clientId = "<your client id>"
 config.clientSecret = "<your client secret>"
 
 // Handle some callbacks ... we didn't really want to do this for you ;)
-GithubSelector.shared.didReceiveAuthToken = { token in
+selector.didReceiveAuthToken = { token in
     // Store received oAuth token locally (maybe keychain?)
 }
-GithubSelector.shared.logout = {
+selector.logout = {
     // User requested logout, delete locally stored oAuth token (probably from keychain?)
 }
 
@@ -50,7 +93,7 @@ if let token = getYourToken() {
 }
 
 // User has finally decided to select a file
-GithubSelector.shared.didSelectFile = { file in
+selector.didSelectFile = { file in
     /*
     Access the following on your returned file
     
@@ -63,7 +106,17 @@ GithubSelector.shared.didSelectFile = { file in
 }
 
 // Present your brand new Github file selector to the user
-GithubSelector.present(inViewController: self, configuration: config)
+selector.present(inViewController: self, configuration: config)
+```
+
+In your AppDelegate you have to put a deeplink handler in order to see incoming authentications:
+
+```Swift
+func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    let selector = GithubSelector()
+    selector.handle(openURL: url)
+    return true
+}
 ```
 
 ## Running demo app
@@ -108,6 +161,7 @@ Simple way to localize GithubSelector is to add the following localization keys 
 // Files
 "gs.files.folder" = "Folder";
 "gs.files.chmod" = "#%@";
+"gs.files.chmod.full" = "chmod: %@"
 "gs.files.size" = "Size: %@";
 "gs.files.change-branch" = "Branches";
 "gs.files.select" = "Select";

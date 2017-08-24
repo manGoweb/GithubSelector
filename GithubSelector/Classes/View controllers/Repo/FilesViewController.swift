@@ -45,16 +45,16 @@ class FilesViewController: TableViewController {
             
             if file.type == "tree" {
                 let c = FilesViewController()
+                c.githubSelector = self.githubSelector
                 c.repo = self.repo
                 c.file = file
-                
                 self.navigationController?.pushViewController(c, animated: true)
             }
             else {
                 let c = FilePreviewViewController()
+                c.githubSelector = self.githubSelector
                 c.repo = self.repo
                 c.file = file
-                
                 self.navigationController?.pushViewController(c, animated: true)
             }
         }
@@ -63,7 +63,7 @@ class FilesViewController: TableViewController {
     }
     
     private func loadData() {
-        guard let config = GithubSelector.shared.tokenConfig else {
+        guard let config = githubSelector.tokenConfig else {
             return
         }
         
@@ -123,6 +123,7 @@ class FilesViewController: TableViewController {
     
     func changeBranchTapped(_ sender: UIBarButtonItem) {
         let c = BranchesViewController()
+        c.githubSelector = githubSelector
         c.repo = repo
         self.navigationController?.pushViewController(c, animated: true)
     }

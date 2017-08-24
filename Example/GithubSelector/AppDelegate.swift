@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        GithubSelector.shared.handle(openURL: url)
+        let selector = GithubSelector()
+        selector.handle(openURL: url)
         return true
     }
 

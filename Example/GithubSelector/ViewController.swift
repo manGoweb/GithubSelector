@@ -68,6 +68,8 @@ class ViewController: UIViewController {
             fatalError("Secrets file is missing data")
         }
         
+        let selector = GithubSelector()
+        
         let config = BaseConfig()
         config.clientId = clientId
         config.clientSecret = clientSecret
@@ -75,21 +77,21 @@ class ViewController: UIViewController {
         let keychainKey = "github-token"
         
         let keychain = KeychainSwift()
-        GithubSelector.shared.didReceiveAuthToken = { token in
+        selector.didReceiveAuthToken = { token in
             keychain.set(token, forKey: keychainKey)
         }
-        GithubSelector.shared.logout = {
+        selector.logout = {
             keychain.delete(keychainKey)
         }
         if let token = keychain.get(keychainKey) {
             config.clientToken = token
         }
         
-        GithubSelector.shared.didSelectFile = { file in
+        selector.didSelectFile = { file in
             self.fileLabel.text = "Selected: \(file.name)"
         }
         
-        GithubSelector.present(inViewController: self, configuration: config)
+        selector.present(inViewController: self, configuration: config)
     }
 
 }

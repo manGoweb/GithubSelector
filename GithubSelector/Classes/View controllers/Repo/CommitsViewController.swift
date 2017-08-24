@@ -41,7 +41,7 @@ class CommitsViewController: TableViewController {
     }
     
     private func loadData() {
-        guard let config = GithubSelector.shared.tokenConfig else {
+        guard let config = githubSelector.tokenConfig else {
             return
         }
         
@@ -67,9 +67,9 @@ class CommitsViewController: TableViewController {
     
     func navigate(to commit: Commit, animated: Bool = true) {
         let c = FilesViewController()
+        c.githubSelector = githubSelector
         c.repo = repo
         c.commit = commit
-        
         navigationController?.pushViewController(c, animated: animated)
     }
     

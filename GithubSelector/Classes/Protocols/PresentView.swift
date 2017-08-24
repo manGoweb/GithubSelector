@@ -11,6 +11,7 @@ import Foundation
 
 protocol PresentView {
     
+    var file: File! { get set }
     var fileData: Data? { get set }
     
 }

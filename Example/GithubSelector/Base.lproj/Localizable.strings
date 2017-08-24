@@ -24,6 +24,7 @@
 // Files
 "gs.files.folder" = "Folder";
 "gs.files.chmod" = "#%@";
+"gs.files.chmod.full" = "chmod: %@"
 "gs.files.size" = "Size: %@";
 "gs.files.change-branch" = "Branches";
 "gs.files.select" = "Select";

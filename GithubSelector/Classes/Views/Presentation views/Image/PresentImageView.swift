@@ -12,6 +12,8 @@ import UIKit
 
 class PresentImageView: View, PresentView {
     
+    var file: File!
+    
     var fileData: Data? {
         didSet {
             
