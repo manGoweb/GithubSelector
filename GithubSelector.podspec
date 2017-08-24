@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GithubSelector'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = 'Github API enabled file selector written in Swift.'
 
   s.description      = "GithubSelector is a file browser that allows you to brows through all your repos using github API V3. You can browse any repo you have access to, private or public, yours or a fork while switching branches or selecting any historic commit you might need. Once done, file will be downloaded and passed back onto you in closure with all the info and content of your file as plain Data."
