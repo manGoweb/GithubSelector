@@ -11,6 +11,17 @@ GithubSelector is a file browser that allows you to brows through all your repos
 
 Once done, file will be downloaded and passed back onto you in closure with all the info and content of your file as plain `Data`.
 
+## Screenshots
+
+<img src="/Screenshots/1-login.png?raw=true" width="210" /> <img src="/Screenshots/3-repos.png?raw=true" width="210" />
+<img src="/Screenshots/4-files.png?raw=true" width="210" />
+<img src="/Screenshots/5-text.png?raw=true" width="210" />
+<img src="/Screenshots/6-image.png?raw=true" width="210" />
+<img src="/Screenshots/7-file.png?raw=true" width="210" />
+<img src="/Screenshots/8-branches.png?raw=true" width="210" />
+<img src="/Screenshots/9-commits.png?raw=true" width="210" />
+
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
