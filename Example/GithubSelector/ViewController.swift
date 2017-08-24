@@ -58,40 +58,23 @@ class ViewController: UIViewController {
     // MARK: Actions
     
     func startSelectingFiles(_ sender: UIButton) {
-        guard let fileUrl = Bundle.main.url(forResource: "Secrets", withExtension: "plist"), let data = try? Data(contentsOf: fileUrl) else {
-            fatalError("Secrets file not found")
-        }
-        guard let secrets = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: String] else {
-            fatalError("Secrets file is not in a correct format")
-        }
-        guard let clientId = secrets?["clientId"], let clientSecret = secrets?["clientSecret"] else {
-            fatalError("Secrets file is missing data")
-        }
-        
-        let selector = GithubSelector()
-        
-        let config = BaseConfig()
-        config.clientId = clientId
-        config.clientSecret = clientSecret
-        
-        let keychainKey = "github-token"
+        let config = Config()
         
         let keychain = KeychainSwift()
-        selector.didReceiveAuthToken = { token in
-            keychain.set(token, forKey: keychainKey)
-        }
-        selector.logout = {
-            keychain.delete(keychainKey)
-        }
-        if let token = keychain.get(keychainKey) {
+        if let token = keychain.get(config.keychainKey) {
             config.clientToken = token
         }
         
+        let selector = GithubSelector(configuration: config)
+        
+        selector.logout = {
+            keychain.delete(config.keychainKey)
+        }
         selector.didSelectFile = { file in
             self.fileLabel.text = "Selected: \(file.name)"
         }
         
-        selector.present(inViewController: self, configuration: config)
+        selector.present(inViewController: self)
     }
 
 }

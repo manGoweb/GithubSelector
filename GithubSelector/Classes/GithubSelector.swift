@@ -69,10 +69,8 @@ public final class GithubSelector {
         return nc
     }
     
-    public func present(inViewController viewController: UIViewController, animated: Bool = true, configuration config: Configurable? = nil) {
-        configuration = config
+    public func present(inViewController viewController: UIViewController, animated: Bool = true) {
         let base = baseViewController()
-        
         viewController.present(base, animated: animated, completion: nil)
     }
     
@@ -87,16 +85,16 @@ public final class GithubSelector {
             self.tokenConfig = config
             self.configuration.clientToken = token
             
-            NotificationCenter.default.post(name: GithubSelectorLoginChangedNotification, object: config)
-            
             self.didReceiveAuthToken?(token)
+            
+            NotificationCenter.default.post(name: GithubSelectorLoginChangedNotification, object: token)
         }
     }
     
     // MARK: - Private interface
     
-    public init() {
-        
+    public init(configuration config: Configurable) {
+        configuration = config
     }
     
 }

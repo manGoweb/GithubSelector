@@ -109,10 +109,18 @@ class HomeViewController: TableViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func loginNotificationRecieved(_ notification: Notification) {
+        if let token = notification.object as? String {
+            githubSelector.configuration.clientToken = token
+        }
+    }
+    
     // MARK View lifecycle
     
     override func loadView() {
         super.loadView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(loginNotificationRecieved(_:)), name: GithubSelectorLoginChangedNotification, object: nil)
         
         configureNavBar()
         configureTableView()
@@ -146,6 +154,12 @@ class HomeViewController: TableViewController {
         if !didLoadData {
             loadData()
         }
+    }
+    
+    // MARK: Initialization
+    
+    deinit {
+         NotificationCenter.default.removeObserver(self, name: GithubSelectorLoginChangedNotification, object: nil);
     }
     
 }

@@ -11,8 +11,7 @@ import Foundation
 
 class FilePreviewViewController: ViewController {
     
-    //let maxFileSize: Int = 1000000
-    let maxFileSize: Int = 100
+    let maxFileSize: Int = 1000000 // Display files of up to 1mb in size
     
     var repo: Repository!
     

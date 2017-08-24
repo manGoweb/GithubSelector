@@ -8,6 +8,7 @@
 
 import UIKit
 import GithubSelector
+import KeychainSwift
 
 
 @UIApplicationMain
@@ -29,7 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        let selector = GithubSelector()
+        let config = Config()
+        let selector = GithubSelector(configuration: config)
+        let keychain = KeychainSwift()
+        selector.didReceiveAuthToken = { token in
+            keychain.set(token, forKey: config.keychainKey)
+        }
         selector.handle(openURL: url)
         return true
     }

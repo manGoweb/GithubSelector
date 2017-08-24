@@ -77,7 +77,7 @@ class LoginViewController: ViewController {
     // MARK: Notifications
     
     func loginNotificationRecieved(_ notification: Notification) {
-        if githubSelector.configuration.clientToken != nil {
+        if let _ = notification.object as? String {
             dismiss(animated: true, completion: nil)
         }
     }

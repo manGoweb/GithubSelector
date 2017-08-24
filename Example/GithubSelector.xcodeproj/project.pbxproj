@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1545155E1F4E21BA00B96AC7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 154515601F4E21BA00B96AC7 /* Localizable.strings */; };
+		154515671F4F7F2C00B96AC7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154515661F4F7F2C00B96AC7 /* Config.swift */; };
 		156D7AF61F425A550075ACE7 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 156D7AF51F425A550075ACE7 /* Secrets.plist */; };
 		15CBB23B1F4B0BF0004A2D26 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15CBB23A1F4B0BF0004A2D26 /* SnapKit.framework */; };
 		4A1191F2D5B3935161F7D24A /* Pods_GithubSelector_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB9377BB0E5F5940B6E7B5C3 /* Pods_GithubSelector_Tests.framework */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		0D4B46D1ACBC776340395158 /* Pods-GithubSelector_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubSelector_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GithubSelector_Tests/Pods-GithubSelector_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		154515611F4E21BC00B96AC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		154515661F4F7F2C00B96AC7 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		156D7AF51F425A550075ACE7 /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		15CBB23A1F4B0BF0004A2D26 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../../../Users/pro/Library/Developer/Xcode/DerivedData/GithubSelector-bwtmrxiztbzfftckxmevrxkrhiut/Build/Products/Debug-iphoneos/SnapKit/SnapKit.framework"; sourceTree = "<group>"; };
 		399DAAD3DDC7C18EA5099491 /* Pods_GithubSelector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubSelector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		154515651F4F7F1A00B96AC7 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				154515661F4F7F2C00B96AC7 /* Config.swift */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
 		156D7ADA1F4241D00075ACE7 /* View controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 		607FACD21AFB9204008FA782 /* Example for GithubSelector */ = {
 			isa = PBXGroup;
 			children = (
+				154515651F4F7F1A00B96AC7 /* Libs */,
 				156D7ADA1F4241D00075ACE7 /* View controllers */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
@@ -381,7 +392,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-GithubSelector_Example/Pods-GithubSelector_Example-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/GithubSelector/GithubSelector.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/GithubSelector/GithubSelector.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -416,6 +427,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				154515671F4F7F2C00B96AC7 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

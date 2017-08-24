@@ -61,7 +61,17 @@ in your `AppDelegate` you have to put a deeplink handler in order to see incomin
 
 ```Swift
 func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-    let selector = GithubSelector()
+    // Create a new config
+    let config = BaseConfig()
+    config.clientId = "<your client id>"
+    config.clientSecret = "<your client secret>"
+    
+    // Store the oAuth token ... we didn't really want to do this for you ;)
+    selector.didReceiveAuthToken = { token in
+        // Store received oAuth token locally (maybe keychain?)
+    }
+
+    let selector = GithubSelector(config)
     selector.handle(openURL: url)
     return true
 }
@@ -79,10 +89,6 @@ let config = BaseConfig()
 config.clientId = "<your client id>"
 config.clientSecret = "<your client secret>"
 
-// Handle some callbacks ... we didn't really want to do this for you ;)
-selector.didReceiveAuthToken = { token in
-    // Store received oAuth token locally (maybe keychain?)
-}
 selector.logout = {
     // User requested logout, delete locally stored oAuth token (probably from keychain?)
 }
