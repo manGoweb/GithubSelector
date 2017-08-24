@@ -45,7 +45,7 @@ class CommitsViewController: TableViewController {
             return
         }
         
-        Octokit(config).commits(owner: repo.owner.login!, repo: repo.name!, branch: branch.name!) { (response) in
+        _ = Octokit(config).commits(owner: repo.owner.login!, repo: repo.name!, branch: branch.name!) { (response) in
             switch response {
             case .success(let commits):
                 self.dataManager.convertData(commits: commits)

@@ -45,7 +45,7 @@ class BranchesViewController: TableViewController {
             return
         }
         
-        Octokit(config).branches(owner: repo.owner.login!, repo: repo.name!) { (response) in
+        _ = Octokit(config).branches(owner: repo.owner.login!, repo: repo.name!) { (response) in
             switch response {
             case .success(let branches):
                 self.didLoadData = true

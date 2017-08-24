@@ -101,7 +101,7 @@ enum CommitRouter: Router {
         switch self {
         case .readCommits(_, _, _, let branch, let page, let perPage):
             var p = ["per_page": perPage, "page": page]
-            if let b = branch {
+            if let _ = branch {
                 p["sha"] = branch
             }
             return p

@@ -8,31 +8,25 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GithubSelector'
-  s.version          = '0.1.0'
+  s.version          = '0.0.2'
   s.summary          = 'Github API enabled file selector written in Swift.'
 
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.description      = "GithubSelector is a file browser that allows you to brows through all your repos using github API V3. You can browse any repo you have access to, private or public, yours or a fork while switching branches or selecting any historic commit you might need. Once done, file will be downloaded and passed back onto you in closure with all the info and content of your file as plain Data."
 
-  s.description      = "This shall be good!"
-
-  s.homepage         = 'https://github.com/Ondrej Rafaj/GithubSelector'
+  s.homepage         = 'https://github.com/manGoweb/GithubSelector'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Ondrej Rafaj' => 'dev@mangoweb.cz' }
-  s.source           = { :git => 'https://github.com/Ondrej Rafaj/GithubSelector.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/manGoweb/GithubSelector.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/rafiki270'
 
   s.ios.deployment_target = '10.1'
 
   s.source_files = 'GithubSelector/Classes/**/*'
   
-  s.resource_bundles = {
-    'GithubSelector' => ['GithubSelector/Localization/*.lproj']
-  }
+  #s.resource_bundles = {
+  #  'GithubSelector' => ['GithubSelector/Localization/*.lproj']
+  #}
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
