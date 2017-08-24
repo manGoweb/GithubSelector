@@ -60,7 +60,7 @@ enum BlobRouter: Router {
     
     var params: [String: Any] {
         switch self {
-        case .readBlob(_, _, _, let sha):
+        case .readBlob(_, _, _, _):
             return [:]
         }
     }

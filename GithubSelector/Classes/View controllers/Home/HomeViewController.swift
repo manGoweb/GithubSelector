@@ -59,7 +59,7 @@ class HomeViewController: TableViewController {
     }
     
     private func loadData(_ config: TokenConfiguration, page: Int = 1, completion: @escaping ((_ repos: [Repository])->())) {
-        Octokit(config).repositories(page: String(page), perPage: String(perPage)) { response in
+        _ = Octokit(config).repositories(page: String(page), perPage: String(perPage)) { response in
             DispatchQueue.main.async {
                 switch response {
                 case .success(let repos):

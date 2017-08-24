@@ -18,7 +18,6 @@ public enum AllowSelecting {
 
 public protocol Configurable {
     
-    
     var clientId: String { get }
     var clientSecret: String { get }
     
