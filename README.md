@@ -146,7 +146,7 @@ We have intentionaly left out any localizations out of the GithubSelector in ord
 
 #### NSLocalizedString
 
-Simple way to localize GithubSelector is to add the following localization keys into your `Localizable.strins` file.
+Simple way to localize GithubSelector is to add the following localization keys into your `Localizable.strings` file.
 ```C
 // General
 "gs.general.total" = "Total: %d";

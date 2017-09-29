@@ -36,6 +36,7 @@
 		154515661F4F7F2C00B96AC7 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		1545156C1F4F9B8200B96AC7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		156D7AF51F425A550075ACE7 /* Secrets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		15796BBD1F7EFF9C0037F654 /* Localizable.strings.demo */ = {isa = PBXFileReference; lastKnownFileType = text; path = Localizable.strings.demo; sourceTree = "<group>"; };
 		15CBB23A1F4B0BF0004A2D26 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "../../../../Users/pro/Library/Developer/Xcode/DerivedData/GithubSelector-bwtmrxiztbzfftckxmevrxkrhiut/Build/Products/Debug-iphoneos/SnapKit/SnapKit.framework"; sourceTree = "<group>"; };
 		399DAAD3DDC7C18EA5099491 /* Pods_GithubSelector_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GithubSelector_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		432856162963B9B0B1128545 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 				432856162963B9B0B1128545 /* README.md */,
 				D5FB2C0C0479084F45D533CF /* LICENSE */,
 				1545156C1F4F9B8200B96AC7 /* Cartfile */,
+				15796BBD1F7EFF9C0037F654 /* Localizable.strings.demo */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
