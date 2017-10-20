@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     
     // MARK: Actions
     
-    func startSelectingFiles(_ sender: UIButton) {
+    @objc func startSelectingFiles(_ sender: UIButton) {
         let config = Config()
         
         let keychain = KeychainSwift()

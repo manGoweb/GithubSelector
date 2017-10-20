@@ -121,7 +121,7 @@ class FilesViewController: TableViewController {
     
     // MARK: Actions
     
-    func changeBranchTapped(_ sender: UIBarButtonItem) {
+    @objc func changeBranchTapped(_ sender: UIBarButtonItem) {
         let c = BranchesViewController()
         c.githubSelector = githubSelector
         c.repo = repo

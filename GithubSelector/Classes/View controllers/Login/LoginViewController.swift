@@ -16,6 +16,7 @@ class LoginViewController: ViewController {
     let githubLogo = UIImageView()
     let authButton = UIButton()
     
+    var requestClose: (()->())?
     
     // MARK: View lifecycle
     
@@ -23,6 +24,9 @@ class LoginViewController: ViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        let close = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(close(_:)))
+        navigationItem.leftBarButtonItem = close
         
         githubLogo.contentMode = .scaleAspectFit
         githubLogo.tintColor = .darkGray
@@ -53,7 +57,12 @@ class LoginViewController: ViewController {
     
     // MARK: Actions
     
-    func authenticate(_ sender: UIButton) {
+    @objc func close(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+        requestClose?()
+    }
+    
+    @objc func authenticate(_ sender: UIButton) {
         guard let url = githubSelector.oAuthConfig.authenticate() else {
             return
         }
@@ -76,7 +85,7 @@ class LoginViewController: ViewController {
     
     // MARK: Notifications
     
-    func loginNotificationRecieved(_ notification: Notification) {
+    @objc func loginNotificationRecieved(_ notification: Notification) {
         if let _ = notification.object as? String {
             dismiss(animated: true, completion: nil)
         }

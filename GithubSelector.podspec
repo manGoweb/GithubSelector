@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GithubSelector'
-  s.version          = '0.0.4'
+  s.version          = '0.4.0'
   s.summary          = 'Github API enabled file selector written in Swift.'
 
   s.description      = "GithubSelector is a file browser that allows you to brows through all your repos using github API V3. You can browse any repo you have access to, private or public, yours or a fork while switching branches or selecting any historic commit you might need. Once done, file will be downloaded and passed back onto you in closure with all the info and content of your file as plain Data."
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/manGoweb/GithubSelector.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/rafiki270'
 
-  s.ios.deployment_target = '10.1'
+  s.ios.deployment_target = '10.3'
 
   s.source_files = 'GithubSelector/Classes/**/*'
   
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'SnapKit', '~> 3.2.0'
-  s.dependency 'Presentables', '~> 0.1.3'
+  s.dependency 'SnapKit', '~> 4.0.0'
+  s.dependency 'Presentables', '~> 0.4.0'
   s.dependency 'NBNRequestKit', '~> 2.0.2'
 end

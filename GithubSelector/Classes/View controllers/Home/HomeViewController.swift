@@ -98,18 +98,18 @@ class HomeViewController: TableViewController {
     
     // MARK: Actions
     
-    func close(_ sender: UIBarButtonItem) {
+    @objc func close(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
-    func logout(_ sender: UIBarButtonItem) {
+    @objc func logout(_ sender: UIBarButtonItem) {
         githubSelector.configuration.clientToken = nil
         githubSelector.logout?()
         
         dismiss(animated: true, completion: nil)
     }
     
-    func loginNotificationRecieved(_ notification: Notification) {
+    @objc func loginNotificationRecieved(_ notification: Notification) {
         if let token = notification.object as? String {
             githubSelector.configuration.clientToken = token
         }
@@ -139,6 +139,9 @@ class HomeViewController: TableViewController {
         
         if githubSelector?.configuration.clientToken == nil {
             let c = LoginViewController()
+            c.requestClose = {
+                self.dismiss(animated: true)
+            }
             c.githubSelector = githubSelector
             let nc = UINavigationController(rootViewController: c)
             nc.modalTransitionStyle = .crossDissolve

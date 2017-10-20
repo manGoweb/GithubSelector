@@ -96,7 +96,7 @@ class FilePreviewViewController: ViewController {
     
     // MARK: Actions
     
-    func selectFileTapped(_ sender: UIBarButtonItem) {
+    @objc func selectFileTapped(_ sender: UIBarButtonItem) {
         let githubFile = GithubFile(data: data!, name: file.path!, url: file.url!, mode: file.mode!, size: file.size)
         githubSelector.didSelectFile?(githubFile)
         
