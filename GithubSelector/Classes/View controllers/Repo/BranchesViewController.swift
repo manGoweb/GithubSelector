@@ -36,7 +36,7 @@ class BranchesViewController: TableViewController {
             self.navigate(to: branch)
         }
         
-        var dc: PresentableManager = dataManager
+        var dc: TableViewPresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)
     }
     

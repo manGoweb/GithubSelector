@@ -58,7 +58,7 @@ class FilesViewController: TableViewController {
                 self.navigationController?.pushViewController(c, animated: true)
             }
         }
-        var dc: PresentableManager = dataManager
+        var dc: TableViewPresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)
     }
     

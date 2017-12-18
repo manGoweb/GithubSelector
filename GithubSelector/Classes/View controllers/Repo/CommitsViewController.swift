@@ -36,7 +36,7 @@ class CommitsViewController: TableViewController {
             let commit: Commit = self.dataManager.originalData[info.indexPath.row]
             self.navigate(to: commit)
         }
-        var dc: PresentableManager = dataManager
+        var dc: TableViewPresentableManager = dataManager
         tableView.bind(withPresentableManager: &dc)
     }
     
