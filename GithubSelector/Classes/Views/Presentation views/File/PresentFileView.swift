@@ -19,7 +19,7 @@ class PresentFileView: View, PresentView {
             
             let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(file.size), countStyle: .file)
             fileSizeLabel.text = Localization.get("gs.files.size", fileSizeWithUnit)
-            fileModeLabel.text = Localization.get("gs.files.chmod.full", String(file.mode!.characters.suffix(3)))
+            fileModeLabel.text = Localization.get("gs.files.chmod.full", String(file.mode!.suffix(3)))
         }
     }
     

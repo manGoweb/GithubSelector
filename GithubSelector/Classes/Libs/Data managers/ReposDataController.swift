@@ -29,7 +29,7 @@ class ReposDataController: PresentableTableViewDataManager {
         var lastDataSection: [Repository]!
         
         for repo: Repository in sortedRepos {
-            let firstLetter: String = ((repo.name != nil) ? "\(repo.name!.characters.first ?? "-")" : "-").uppercased()
+            let firstLetter: String = ((repo.name != nil) ? "\(repo.name!.first ?? "-")" : "-").uppercased()
             if !indexLetters.contains(firstLetter) {
                 indexLetters.append(firstLetter)
                 

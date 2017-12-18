@@ -58,7 +58,7 @@ class BranchesDataController: PresentableTableViewDataManager {
             var lastDataSection: [Branch]!
             
             for branch: Branch in sortedBranches {
-                let firstLetter: String = ((branch.name != nil) ? "\(branch.name!.characters.first ?? "-")" : "-").uppercased()
+                let firstLetter: String = ((branch.name != nil) ? "\(branch.name!.first ?? "-")" : "-").uppercased()
                 if !indexLetters.contains(firstLetter) {
                     indexLetters.append(firstLetter)
                     

@@ -8,12 +8,12 @@
 
 extension Color {
     convenience init?(hexTriplet hex: String) {
-        var hexChars = hex.characters
-        let red = Int(String(hexChars.prefix(2)), radix: 16)
-        hexChars = hexChars.dropFirst(2)
-        let green = Int(String(hexChars.prefix(2)), radix: 16)
-        hexChars = hexChars.dropFirst(2)
-        let blue = Int(String(hexChars), radix: 16)
+        var hex = hex
+        let red = Int(String(hex.prefix(2)), radix: 16)
+        hex = String(hex.dropFirst(2))
+        let green = Int(String(hex.prefix(2)), radix: 16)
+        hex = String(hex.dropFirst(2))
+        let blue = Int(String(hex), radix: 16)
         if let red = red, let green = green, let blue = blue {
             self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1)
         } else {

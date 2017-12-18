@@ -42,7 +42,7 @@ class CommitTableViewCell: TableViewCell, Presentable {
             
             // Commit hash
             if let hash = commit?.sha {
-                commitHashLabel.text = "#\(String(hash.characters.prefix(7)))"
+                commitHashLabel.text = "#\(String(hash.prefix(7)))"
             }
             
             // User avatar

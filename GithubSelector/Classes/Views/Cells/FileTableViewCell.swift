@@ -30,7 +30,7 @@ class FileTableViewCell: TableViewCell, Presentable {
                 
                 // Mode
                 if let mode = file?.mode {
-                    fileModeLabel.text = Localization.get("gs.files.chmod", String(mode.characters.suffix(3)))
+                    fileModeLabel.text = Localization.get("gs.files.chmod", String(mode.suffix(3)))
                 }
             }
             else {
